@@ -7,6 +7,6 @@ platform:
 
 steps: 
 - name: build
-  image: base.reg.nosadnile.net/nosadnile-network/java:openjdk16
+  image: back.reg.nosadnile.net/nosadnile-network/java:openjdk16
   commands:
   - gradle build
