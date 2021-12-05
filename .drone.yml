@@ -9,4 +9,4 @@ steps:
 - name: build
   image: back.reg.nosadnile.net/nosadnile-network/java:openjdk16
   commands:
-  - bash gradle build
+  - bash gradlew build
