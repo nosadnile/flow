@@ -4,6 +4,6 @@ name: default
 
 steps: 
 - name: build
-  image: adoptopenjdk/openjdk16
+  image: nosadnile-network/java:openjdk16
   commands:
   - bash gradlew build
