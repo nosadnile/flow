@@ -1,0 +1,9 @@
+name: Flow
+version: '${version}'
+main: net.nosadnile.flow.FlowSpigot
+api-version: 1.18
+prefix: Flow (Spigot)
+load: STARTUP
+authors: [ RedstoneWizard08, NoSadBeHappy, KingGoldGolem, HeartBaker ]
+description: The NoSadNile Network's main plugin.
+website: https://www.nosadnile.net/

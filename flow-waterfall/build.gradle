@@ -1,0 +1,37 @@
+plugins {
+    id 'com.github.johnrengelman.shadow'
+}
+
+repositories {
+    maven {
+        name = 'sonatype'
+        url = 'https://oss.sonatype.org/content/groups/public/'
+    }
+    maven {
+        name = 'papermc-repo'
+        url = 'https://papermc.io/repo/repository/maven-public/'
+    }
+}
+
+dependencies {
+    api project(':flow-common')
+    compileOnly 'io.github.waterfallmc:waterfall-api:1.18-R0.1-SNAPSHOT'
+}
+
+processResources {
+    def props = [version: project.version]
+    inputs.properties props
+    expand props
+    filteringCharset 'UTF-8'
+    filesMatching('bungee.yml') {
+        expand props
+    }
+}
+
+shadowJar {
+    dependencies {
+        include(dependency(':flow-common'))
+    }
+}
+
+tasks.build.dependsOn tasks.shadowJar

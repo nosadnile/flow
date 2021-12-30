@@ -1,0 +1,3 @@
+rootProject.name = 'flow'
+
+include 'flow-common', 'flow-spigot', 'flow-waterfall'
