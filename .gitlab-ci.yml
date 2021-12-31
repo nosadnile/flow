@@ -1,2 +1,14 @@
 default:
-  image: openjdk:17.0.1-jdkc
+  image: openjdk:17-alpine
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - ./gradlew build
+  artifacts:
+    - flow-common/build/libs/*.jar
+    - flow-spigot/build/libs/*.jar
+    - flow-waterfall/build/libs/*.jar
