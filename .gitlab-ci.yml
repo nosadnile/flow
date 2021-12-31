@@ -1,2 +1,2 @@
 default:
-  image: openjdk:17.0.1-jdk
+  image: openjdk:17.0.1-jdkc
