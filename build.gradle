@@ -31,4 +31,12 @@ subprojects {
     repositories {
         mavenCentral()
     }
+
+    jar {
+        manifest {
+            attributes(
+                    'Main-Class': 'net.nosadnile.flow.app.AppMain'
+            )
+        }
+    }
 }
