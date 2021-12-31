@@ -11,11 +11,14 @@ repositories {
         name = 'papermc-repo'
         url = 'https://papermc.io/repo/repository/maven-public/'
     }
+    mavenCentral()
 }
 
 dependencies {
     api project(':flow-common')
     compileOnly 'io.github.waterfallmc:waterfall-api:1.18-R0.1-SNAPSHOT'
+    compileOnly 'net.luckperms:api:5.3'
+    api 'org.mongodb:mongo-java-driver:2.12.3'
 }
 
 processResources {
