@@ -9,6 +9,7 @@ build:
   script:
     - ./gradlew build
   artifacts:
-    - flow-common/build/libs/*.jar
-    - flow-spigot/build/libs/*.jar
-    - flow-waterfall/build/libs/*.jar
+    paths:
+      - flow-common/build/libs/*.jar
+      - flow-spigot/build/libs/*.jar
+      - flow-waterfall/build/libs/*.jar
