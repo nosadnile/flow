@@ -3,6 +3,7 @@ default:
 
 stages:
   - build
+  - publish
 
 build:
   stage: build
@@ -14,4 +15,10 @@ build:
     - mv flow-waterfall/build/libs/*-all.jar .
   artifacts:
     paths:
-      - /*.jar
+      - '*.jar'
+
+publish:
+  stage: build
+  script:
+    - echo "Publishing to server..."
+  needs: ["build"]
