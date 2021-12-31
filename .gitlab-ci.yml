@@ -1,5 +1,5 @@
 default:
-  image: openjdk:17-alpine
+  image: openjdk:17-oraclelinux8
 
 stages:
   - build
