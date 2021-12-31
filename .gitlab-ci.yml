@@ -9,8 +9,9 @@ build:
   script:
     - chmod +x gradlew
     - ./gradlew build
+    - mv flow-common/build/libs/*.jar .
+    - mv flow-spigot/build/libs/*-all.jar .
+    - mv flow-waterfall/build/libs/*-all.jar .
   artifacts:
     paths:
-      - flow-common/build/libs/*.jar
-      - flow-spigot/build/libs/*.jar
-      - flow-waterfall/build/libs/*.jar
+      - /*.jar
