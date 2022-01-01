@@ -17,10 +17,12 @@ public class DatabaseProvider {
     private Plugin plugin;
     private Configuration config;
     private MongoClient db;
+    private boolean hasConfiguration = false;
 
     public DatabaseProvider(Plugin plugin) {
         try {
             config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(plugin.getDataFolder(), "config.yml"));
+            hasConfiguration = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -31,13 +33,34 @@ public class DatabaseProvider {
         }
     }
 
+    public DatabaseProvider(String host, String port) {
+        try {
+            db = new MongoClient(new MongoClientURI("mongodb://" + host + ":" + port));
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public DatabaseProvider() {
+        try {
+            db = new MongoClient();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void disable() {
         db.close();
+        if(!hasConfiguration) return;
         try {
             ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, new File(plugin.getDataFolder(), "config.yml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public MongoClient getDB() {
+        return db;
     }
 
     public static @Nullable DatabaseProvider get() {

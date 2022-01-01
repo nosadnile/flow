@@ -34,6 +34,7 @@ processResources {
 shadowJar {
     dependencies {
         include(dependency(':flow-common'))
+        include(dependency('org.mongodb:mongo-java-driver:2.12.3'))
     }
 }
 
