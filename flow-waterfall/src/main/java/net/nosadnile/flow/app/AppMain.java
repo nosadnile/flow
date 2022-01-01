@@ -1,23 +1,23 @@
 package net.nosadnile.flow.app;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
-
-import net.nosadnile.flow.api.database.DatabaseProvider;
+//   ----------------------------- DATABASE IMPORTS -----------------------------
+// import java.util.ArrayList;
+// import java.util.List;
+// import com.mongodb.BasicDBObject;
+// import com.mongodb.DB;
+// import com.mongodb.DBCollection;
+// import com.mongodb.DBCursor;
+// import com.mongodb.DBObject;
+// import com.mongodb.MongoClient;
+// import net.nosadnile.flow.api.database.DatabaseProvider;
 
 public class AppMain {
     public static void main(String[] args) {
-        DatabaseProvider db_ = new DatabaseProvider("localhost", "27017");
-        MongoClient db = db_.getDB();
-        DB flowDb = db.getDB("_nsn_flow-pre-alpha-testing");
-        DBCollection players = flowDb.getCollection("players");
+        //   ----------------------------- STARTING -----------------------------
+        // DatabaseProvider db_ = new DatabaseProvider("localhost", "27017");
+        // MongoClient db = db_.getDB();
+        // DB flowDb = db.getDB("_nsn_flow-pre-alpha-testing");
+        // DBCollection players = flowDb.getCollection("players");
         //   ----------------------------- INSERTING -----------------------------
         // List<DBObject> rw08ranks = new ArrayList<>();
         // rw08ranks.add(new BasicDBObject("_id", 0)
@@ -36,7 +36,8 @@ public class AppMain {
         // DBCursor cursor = players.find(query);
         // DBObject rw08 = cursor.one();
         // System.out.println(rw08.toString());
-        db_.disable();
+        //   ----------------------------- EXITING -----------------------------
+        // db_.disable();
         System.out.println("Execution finished.");
     }
 }
