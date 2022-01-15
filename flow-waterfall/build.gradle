@@ -19,6 +19,7 @@ dependencies {
     compileOnly 'io.github.waterfallmc:waterfall-api:1.18-R0.1-SNAPSHOT'
     compileOnly 'net.luckperms:api:5.3'
     api 'org.mongodb:mongo-java-driver:2.12.3'
+    api 'com.google.guava:guava:31.0.1-jre'
 }
 
 processResources {
@@ -35,6 +36,7 @@ shadowJar {
     dependencies {
         include(dependency(':flow-common'))
         include(dependency('org.mongodb:mongo-java-driver:2.12.3'))
+        include(dependency('com.google.guava:guava:31.0.1-jre'))
     }
 }
 

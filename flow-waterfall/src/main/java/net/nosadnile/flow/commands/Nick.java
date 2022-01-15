@@ -10,7 +10,7 @@ import java.util.Collections;
 
 public class Nick extends Command implements TabExecutor {
     public Nick() {
-        super("nick", "net.nosadnile.flow.nick");
+        super("nick", "net.nosadnile.flow.b_nick");
     }
 
     @Override

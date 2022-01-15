@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Server extends Command implements TabExecutor {
     public Server() {
-        super("server", "net.nosadnile.flow.server", "switch");
+        super("server", "net.nosadnile.flow.b_server", "switch");
     }
 
     @Override
@@ -29,7 +29,7 @@ public class Server extends Command implements TabExecutor {
             return;
         }
         if(args.length == 2) {
-            if(!sender.hasPermission("net.nosadnile.flow.admin.teleportOther")) {
+            if(!sender.hasPermission("net.nosadnile.flow.admin.b_teleport_other")) {
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f You don't have permission to execute this command!"));
                 return;
             }
@@ -53,9 +53,13 @@ public class Server extends Command implements TabExecutor {
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f You must specify a valid server to switch to!"));
                 return;
             }
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Sending " + playerName + " to &b" + serverName + "&f..."));
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&c " + sender.getName() + "&f is sending you to &b" + serverName + "&f..."));
-            player.connect(server);
+            if(player.getServer().getInfo().getName() == server.getName()) {
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f " + playerName + " is already connected to &b" + serverName + "&f!"));
+            } else {
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Sending " + playerName + " to &b" + serverName + "&f..."));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&c " + sender.getName() + "&f is sending you to &b" + serverName + "&f..."));
+                player.connect(server);
+            }
             return;
         }
         String serverName = args[0];
@@ -69,8 +73,12 @@ public class Server extends Command implements TabExecutor {
             return;
         }
         ProxiedPlayer player = (ProxiedPlayer) sender;
-        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Sending you to &b" + serverName + "&f..."));
-        player.connect(server);
+        if(player.getServer().getInfo().getName() == server.getName()) {
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f You are already connected to &b" + serverName + "&f!"));
+        } else {
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Sending you to &b" + serverName + "&f..."));
+            player.connect(server);
+        }
     }
 
     @Override
