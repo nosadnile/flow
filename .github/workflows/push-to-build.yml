@@ -22,14 +22,17 @@ jobs:
           name: JAR Artifacts
           path: |
             *-all.jar
+      - name: Set outputs
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
       - name: Create release
         uses: actions/create-release@v1
         id: create_release
         with:
           draft: false
           prerelease: false
-          release_name: v0.1.0-${{ github.sha }}
-          tag_name: ${{ github.sha }}
+          release_name: v0.1.0-${{ steps.vars.outputs.sha_short }}
+          tag_name: ${{ steps.vars.outputs.sha_short }}
           body_path: body.md
         env:
           GITHUB_TOKEN: ${{ github.token }}
