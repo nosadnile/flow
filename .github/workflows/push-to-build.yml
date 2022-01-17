@@ -1,5 +1,8 @@
 name: Build on Push
-on: [push]
+on:
+  push:
+    tags:
+      - '*'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,8 +26,41 @@ jobs:
           path: |
             *-all.jar
       - name: Create release
-        uses: ncipollo/release-action@v1
+        uses: actions/create-release@v1
+        id: create_release
         with:
+          draft: false
+          prerelease: false
+          release_name: ${{ steps.version.outputs.version }}
+          tag_name: ${{ github.ref }}
           artifacts: "*-all.zip"
-          bodyFile: "body.md"
-          token: ${{ secrets.GITHUB_TOKEN }}
+          body_path: body.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Upload waterfall artifact
+        uses: actions/upload-release-artifacts@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./flow-waterfall-1.0.0-all.jar
+          asset_name: flow-waterfall-1.0.0-all.jar
+          asset_content_type: application/java-archive
+      - name: Upload spigot artifact
+        uses: actions/upload-release-artifacts@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./flow-spigot-1.0.0-all.jar
+          asset_name: flow-spigot-1.0.0-all.jar
+          asset_content_type: application/java-archive
+      - name: Upload common artifact
+        uses: actions/upload-release-artifacts@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./flow-common-1.0.0-all.jar
+          asset_name: flow-common-1.0.0-all.jar
+          asset_content_type: application/java-archive
