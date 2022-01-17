@@ -1,2 +1,23 @@
 name: Build on Push
 on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install openjdk-17-jdk openjdk-17-jre
+          sudo apt-get -y upgrade
+          chmod +x gradlew
+          ./gradlew build
+          mv flow-common/build/libs/*-all.jar .
+          mv flow-spigot/build/libs/*-all.jar .
+          mv flow-waterfall/build/libs/*-all.jar .
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: JAR Artifacts
+          path: |
+            *-all.jar
