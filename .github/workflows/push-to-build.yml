@@ -28,8 +28,8 @@ jobs:
         with:
           draft: false
           prerelease: false
-          release_name: ${{ steps.version.outputs.version }}
-          tag_name: ${{ github.ref }}
+          release_name: v0.1.0-${{ github.sha }}
+          tag_name: ${{ github.sha }}
           artifacts: "*-all.zip"
           body_path: body.md
         env:
