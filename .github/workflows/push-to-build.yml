@@ -15,9 +15,18 @@ jobs:
           mv flow-common/build/libs/*-all.jar .
           mv flow-spigot/build/libs/*-all.jar .
           mv flow-waterfall/build/libs/*-all.jar .
+          echo "This release was auto-created by the CI at commit $COMMIT." > body.md
+        env:
+          COMMIT: ${{ GITHUB_SHA }}
       - name: Archive production artifacts
         uses: actions/upload-artifact@v2
         with:
           name: JAR Artifacts
           path: |
             *-all.jar
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "*-all.zip"
+          bodyFile: "body.md"
+          token: ${{ secrets.GITHUB_TOKEN }}
