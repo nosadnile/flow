@@ -38,40 +38,40 @@ jobs:
         id: vars
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
       - name: Create release
-        uses: actions/create-release@v1
+        uses: ncipollo/release-action@v1
         id: create_release
         with:
-          draft: false
-          prerelease: false
-          release_name: ci-${{ steps.vars.outputs.sha_short }}
-          tag_name: ${{ steps.vars.outputs.sha_short }}
-          body_path: body.md
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-      - name: Upload waterfall artifact
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./flow-waterfall-1.0.0-all.jar
-          asset_name: flow-waterfall-1.0.0-all.jar
-          asset_content_type: application/java-archive
-      - name: Upload spigot artifact
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./flow-spigot-1.0.0-all.jar
-          asset_name: flow-spigot-1.0.0-all.jar
-          asset_content_type: application/java-archive
-      - name: Upload common artifact
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./flow-common-1.0.0-all.jar
-          asset_name: flow-common-1.0.0-all.jar
-          asset_content_type: application/java-archive
+          artifacts: "*.jar"
+          bodyFile: "body.md"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: ci-${{ steps.vars.outputs.sha_short }}
+          prerelease: true
+          tag: ${{ steps.vars.outputs.sha_short }}
+          allowUpdates: true
+      #- name: Upload waterfall artifact
+      #  uses: actions/upload-release-asset@v1
+      #  env:
+      #    GITHUB_TOKEN: ${{ github.token }}
+      #  with:
+      #    upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #    asset_path: ./flow-waterfall-1.0.0-all.jar
+      #    asset_name: flow-waterfall-1.0.0-all.jar
+      #    asset_content_type: application/java-archive
+      #- name: Upload spigot artifact
+      #  uses: actions/upload-release-asset@v1
+      #  env:
+      #    GITHUB_TOKEN: ${{ github.token }}
+      #  with:
+      #    upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #    asset_path: ./flow-spigot-1.0.0-all.jar
+      #    asset_name: flow-spigot-1.0.0-all.jar
+      #    asset_content_type: application/java-archive
+      #- name: Upload common artifact
+      #  uses: actions/upload-release-asset@v1
+      #  env:
+      #    GITHUB_TOKEN: ${{ github.token }}
+      #  with:
+      #    upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #    asset_path: ./flow-common-1.0.0-all.jar
+      #    asset_name: flow-common-1.0.0-all.jar
+      #    asset_content_type: application/java-archive
