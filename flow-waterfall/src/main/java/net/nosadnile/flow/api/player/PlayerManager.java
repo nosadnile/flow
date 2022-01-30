@@ -7,16 +7,16 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.nosadnile.flow.FlowWaterfall;
 import net.nosadnile.flow.api.database.DatabaseProvider;
 
+import javax.naming.NameNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.naming.NameNotFoundException;
-
 public class PlayerManager {
-    private Map<String, NSNPlayer> players = new HashMap<>();
+    private Map<String, NSNPlayer> players;
 
     public PlayerManager() {
+        players = new HashMap<>();
         refreshFromDatabase();
     }
 
