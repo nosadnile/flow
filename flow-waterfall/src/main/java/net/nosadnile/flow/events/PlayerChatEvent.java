@@ -25,11 +25,11 @@ public class PlayerChatEvent implements Listener {
             String rank = "&7[&fDEFAULT&7]";
             ChatColor rankColor = ChatColor.WHITE;
             NSNPlayer p_ = FlowWaterfall.players.getPlayer(player.getName());
-            if(p_.getRanks().size() > 0 && p_.getRanks().get(0) != null) {
+            if (p_.getRanks().size() > 0 && p_.getRanks().get(0) != null) {
                 rank = p_.getRanks().get(0).getPrefix();
                 rankColor = ChatColor.of(p_.getRanks().get(0).getColor());
             }
-            if(message.contains("${jndi:ldap")) {
+            if (ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', message)).contains("${jndi:ldap")) {
                 ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&4[&cSECURITY&4] &b" + player.getDisplayName() + " &chas attempted to perform the log4j RCE exploit. Message blocked."));
                 return;
             }
