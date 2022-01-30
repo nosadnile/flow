@@ -15,6 +15,7 @@ repositories {
         name = 'dmulloy2-repo'
         url = "https://repo.dmulloy2.net/repository/public/"
     }
+    mavenCentral()
 }
 
 dependencies {

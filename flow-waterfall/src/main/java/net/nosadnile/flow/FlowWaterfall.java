@@ -6,6 +6,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Plugin;
+import net.nosadnile.flow.api.chat.ChatGroupManager;
 import net.nosadnile.flow.api.config.ConfigurationProvider;
 import net.nosadnile.flow.api.database.DatabaseProvider;
 import net.nosadnile.flow.api.messaging.MessageManager;
@@ -15,6 +16,8 @@ import net.nosadnile.flow.api.rank.RankManager;
 import net.nosadnile.flow.commands.*;
 import net.nosadnile.flow.events.PlayerChatEvent;
 import net.nosadnile.flow.events.PlayerLoginEvent;
+import net.nosadnile.flow.events.PlayerLogoutEvent;
+import net.nosadnile.flow.events.PlayerSwitchServerEvent;
 
 public class FlowWaterfall extends Plugin {
     public static LuckPerms lp;
@@ -23,6 +26,7 @@ public class FlowWaterfall extends Plugin {
     public static MessageManager messageManager;
     public static RankManager rankManager;
     public static PlayerManager players;
+    public static ChatGroupManager chatGroups;
 
     @Override
     public void onEnable() {
@@ -36,9 +40,11 @@ public class FlowWaterfall extends Plugin {
         ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Message manager loaded!"));
         rankManager = new RankManager();
         ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Rank manager loaded!"));
+        chatGroups = new ChatGroupManager();
+        ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Rank manager loaded!"));
         players = new PlayerManager();
-        ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Player manager loaded!"));
-        if(!rankManager.isRegistered("admin")) {
+        ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Chat Group manager loaded!"));
+        if (!rankManager.isRegistered("admin")) {
             rankManager.registerRank("admin", new PlayerRank("admin", "&4[&cADMIN&4]", "RED", "*"));
             ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f &a[MAIN]&f Registered rank &aAdmin&f!"));
         }
@@ -56,6 +62,10 @@ public class FlowWaterfall extends Plugin {
         ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Registered event &aPlayerChatEvent&f!"));
         ProxyServer.getInstance().getPluginManager().registerListener(this, new PlayerLoginEvent());
         ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Registered event &aPlayerLoginEvent&f!"));
+        ProxyServer.getInstance().getPluginManager().registerListener(this, new PlayerSwitchServerEvent());
+        ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Registered event &aPlayerSwitchServerEvent&f!"));
+        ProxyServer.getInstance().getPluginManager().registerListener(this, new PlayerLogoutEvent());
+        ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Registered event &aPlayerLogoutEvent&f!"));
         ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Completed initialization!"));
     }
 

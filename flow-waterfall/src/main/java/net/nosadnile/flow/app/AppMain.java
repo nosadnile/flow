@@ -1,43 +1,36 @@
 package net.nosadnile.flow.app;
 
-//   ----------------------------- DATABASE IMPORTS -----------------------------
-// import java.util.ArrayList;
-// import java.util.List;
-// import com.mongodb.BasicDBObject;
-// import com.mongodb.DB;
-// import com.mongodb.DBCollection;
-// import com.mongodb.DBCursor;
-// import com.mongodb.DBObject;
-// import com.mongodb.MongoClient;
-// import net.nosadnile.flow.api.database.DatabaseProvider;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class AppMain {
     public static void main(String[] args) {
-        //   ----------------------------- STARTING -----------------------------
-        // DatabaseProvider db_ = new DatabaseProvider("localhost", "27017");
-        // MongoClient db = db_.getDB();
-        // DB flowDb = db.getDB("_nsn_flow-pre-alpha-testing");
-        // DBCollection players = flowDb.getCollection("players");
-        //   ----------------------------- INSERTING -----------------------------
-        // List<DBObject> rw08ranks = new ArrayList<>();
-        // rw08ranks.add(new BasicDBObject("_id", 0)
-        // .append("name", "admin")
-        // .append("prefix", "[Admin]")
-        // .append("color", "Red")
-        // .append("permissions", "net.nosadnile.flow.admin.*"));
-        // DBObject player = new BasicDBObject("_id", "111dff66-087b-4948-bbd4-f47ed46af6ac")
-        // .append("username", "RedstoneWizard08")
-        // .append("level", 1)
-        // .append("xp", 0)
-        // .append("ranks", rw08ranks);
-        // players.insert(player);
-        //   ----------------------------- QUERYING -----------------------------
-        // DBObject query = new BasicDBObject("_id", "111dff66-087b-4948-bbd4-f47ed46af6ac");
-        // DBCursor cursor = players.find(query);
-        // DBObject rw08 = cursor.one();
-        // System.out.println(rw08.toString());
-        //   ----------------------------- EXITING -----------------------------
-        // db_.disable();
+        JFrame frame = new JFrame("Flow by NoSadNile");
+        JLabel label = new JLabel("Why are you here. This isn't how plugins work. Just go. LMAO.", SwingConstants.CENTER);
+        label.setFont(new Font(Font.SANS_SERIF, label.getFont().getStyle(), label.getFont().getSize()));
+        label.setForeground(new Color(255, 255, 255));
+        JPanel center = new JPanel(new GridLayout(0, 1));
+        center.add(label);
+        center.setBackground(new Color(31, 33, 32));
+        frame.add(center);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        InputStream iconInputStream = AppMain.class.getClassLoader().getResourceAsStream("icons/icon.png");
+        BufferedImage iconBuffered = null;
+        try {
+            iconBuffered = ImageIO.read(iconInputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        frame.setIconImage(iconBuffered);
+        frame.getContentPane().setBackground(new Color(31, 33, 32));
+        frame.setVisible(true);
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        frame.setResizable(false);
+        frame.setSize(600, 400);
         System.out.println("Execution finished.");
     }
 }

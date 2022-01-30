@@ -2,13 +2,16 @@ package net.nosadnile.flow.api.player;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.nosadnile.flow.api.rank.PlayerRank;
+import net.nosadnile.flow.api.utils.ElementWithId;
+import net.nosadnile.flow.api.utils.ElementWithName;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NSNPlayer {
+public class NSNPlayer implements ElementWithName<String>, ElementWithId<String> {
     private ProxiedPlayer player;
     private List<PlayerRank> ranks;
     private int level;
@@ -45,10 +48,12 @@ public class NSNPlayer {
         return xp;
     }
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -74,15 +79,23 @@ public class NSNPlayer {
         this.player = p;
     }
 
+    public boolean isOnline() {
+        if (this.player == null) return false;
+        for (ProxiedPlayer player : ProxyServer.getInstance().getPlayers()) {
+            if (player.getUniqueId().toString() == this.id) return true;
+        }
+        return false;
+    }
+
     public DBObject toDatabaseObject() {
         String[] ranks_ = new String[ranks.size()];
-        for(int i = 0; i < ranks.size(); i++) {
+        for (int i = 0; i < ranks.size(); i++) {
             PlayerRank rank = ranks.get(i);
             ranks_[i] = rank.getName();
         }
         return new BasicDBObject("_id", id)
-                         .append("level", level)
-                         .append("xp", xp)
+                .append("level", level)
+                .append("xp", xp)
                          .append("ranks", ranks_)
                          .append("name", player.getName());
     }
