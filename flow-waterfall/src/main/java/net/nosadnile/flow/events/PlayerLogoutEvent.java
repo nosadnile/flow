@@ -6,6 +6,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PlayerDisconnectEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
+import net.nosadnile.flow.FlowWaterfall;
 
 public class PlayerLogoutEvent implements Listener {
     @EventHandler
@@ -13,5 +14,6 @@ public class PlayerLogoutEvent implements Listener {
         for (ProxiedPlayer player : ProxyServer.getInstance().getPlayers()) {
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f &a" + e.getPlayer().getDisplayName() + "&f has switched to server &b" + e.getPlayer().getServer().getInfo().getName().toUpperCase() + "&f!"));
         }
+        FlowWaterfall.players.onLogout(e.getPlayer());
     }
 }

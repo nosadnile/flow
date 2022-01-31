@@ -5,6 +5,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.nosadnile.flow.FlowWaterfall;
+import net.nosadnile.flow.api.chat.ChatGroup;
 import net.nosadnile.flow.api.database.DatabaseProvider;
 
 import javax.naming.NameNotFoundException;
@@ -79,13 +80,25 @@ public class PlayerManager {
     }
 
     public void onLogin(ProxiedPlayer p) {
-        if(!players.containsKey(p.getName())) {
+        if (!players.containsKey(p.getName())) {
             addPlayer(p);
             System.out.println(players);
             ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f &a[PLAYERS]&f Registered new player &a" + p.getName() + "&f!"));
         }
         NSNPlayer np = getPlayer(p.getName());
         np.setPlayer(p);
+        np.setCurrentGroup(ChatGroup.GLOBAL);
+        ChatGroup.GLOBAL.addPlayer(np);
+        replacePlayer(p.getName(), np);
+    }
+
+    public void onLogout(ProxiedPlayer p) {
+        NSNPlayer np = getPlayer(p.getName());
+        if (np == null) return;
+        np.setLastMessaged(null);
+        np.setCurrentGroup(null);
+        ChatGroup.GLOBAL.removePlayer(np);
+        np.setPlayer(null);
         replacePlayer(p.getName(), np);
     }
 

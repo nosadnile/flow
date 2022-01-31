@@ -8,15 +8,30 @@ import net.nosadnile.flow.api.utils.ColorUtil;
 import java.util.UUID;
 
 public class ChatGroup extends PlayerGroup {
+    // Static groups
+    public static GlobalChatGroup GLOBAL = new GlobalChatGroup();
+
     private String name;
     private String uuid;
     private ChatColor color;
+    private boolean useCustomPrefix;
+    private String prefix;
+
+    public ChatGroup(String name, ChatColor color, String customPrefix) {
+        super();
+        this.name = name.toUpperCase();
+        this.color = color;
+        this.uuid = UUID.randomUUID().toString();
+        this.useCustomPrefix = true;
+        this.prefix = customPrefix;
+    }
 
     public ChatGroup(String name, ChatColor color) {
         super();
         this.name = name.toUpperCase();
         this.color = color;
         this.uuid = UUID.randomUUID().toString();
+        this.useCustomPrefix = false;
     }
 
     public ChatGroup(String name) {
@@ -24,6 +39,7 @@ public class ChatGroup extends PlayerGroup {
         this.name = name.toUpperCase();
         this.color = ChatColor.AQUA;
         this.uuid = UUID.randomUUID().toString();
+        this.useCustomPrefix = false;
     }
 
     private void init() {
@@ -62,6 +78,14 @@ public class ChatGroup extends PlayerGroup {
         this.color = color;
     }
 
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
     @Deprecated
     public void sendRawMessage(String message) {
         sendMessage_(message);
@@ -74,6 +98,17 @@ public class ChatGroup extends PlayerGroup {
 
     public void sendMessage(String senderName, String messageIn) {
         String message = ColorUtil.darkVariant(color) + "[" + color + name + ColorUtil.darkVariant(color) + "] " + color + senderName + ": &f" + messageIn;
+        if (useCustomPrefix && prefix != null) {
+            message = prefix + " " + senderName + ": &f" + messageIn;
+        }
+        sendNonAnnotatedMessage(message);
+    }
+
+    public void sendMessage(String senderName, String messageIn, String variablePrefix) {
+        String message = ColorUtil.darkVariant(color) + "[" + color + name + ColorUtil.darkVariant(color) + "] " + color + senderName + ": &f" + messageIn;
+        if (variablePrefix != null) {
+            message = variablePrefix + " " + senderName + ": &f" + messageIn;
+        }
         sendNonAnnotatedMessage(message);
     }
 }

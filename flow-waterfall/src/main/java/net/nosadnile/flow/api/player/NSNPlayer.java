@@ -2,8 +2,8 @@ package net.nosadnile.flow.api.player;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.nosadnile.flow.api.chat.ElementWithChatGroup;
 import net.nosadnile.flow.api.rank.PlayerRank;
 import net.nosadnile.flow.api.utils.ElementWithId;
 import net.nosadnile.flow.api.utils.ElementWithName;
@@ -11,8 +11,9 @@ import net.nosadnile.flow.api.utils.ElementWithName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NSNPlayer implements ElementWithName<String>, ElementWithId<String> {
+public class NSNPlayer extends ElementWithChatGroup implements ElementWithName<String>, ElementWithId<String> {
     private ProxiedPlayer player;
+    private NSNPlayer lastMessaged;
     private List<PlayerRank> ranks;
     private int level;
     private int xp;
@@ -80,11 +81,15 @@ public class NSNPlayer implements ElementWithName<String>, ElementWithId<String>
     }
 
     public boolean isOnline() {
-        if (this.player == null) return false;
-        for (ProxiedPlayer player : ProxyServer.getInstance().getPlayers()) {
-            if (player.getUniqueId().toString() == this.id) return true;
-        }
-        return false;
+        return this.player != null;
+    }
+
+    public NSNPlayer getLastMessaged() {
+        return lastMessaged;
+    }
+
+    public void setLastMessaged(NSNPlayer lastMessaged) {
+        this.lastMessaged = lastMessaged;
     }
 
     public DBObject toDatabaseObject() {
