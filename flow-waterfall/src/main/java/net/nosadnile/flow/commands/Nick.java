@@ -6,7 +6,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.TabExecutor;
 
-import java.util.Collections;
+import java.util.ArrayList;
 
 public class Nick extends Command implements TabExecutor {
     public Nick() {
@@ -22,7 +22,11 @@ public class Nick extends Command implements TabExecutor {
         if(args.length == 1) {
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Setting your nickname to: " + args[0]));
             ProxiedPlayer player = (ProxiedPlayer) sender;
-            player.setDisplayName(ChatColor.translateAlternateColorCodes('&', args[0]));
+            if (args[0].equalsIgnoreCase("reset")) {
+                player.setDisplayName(player.getName());
+            } else {
+                player.setDisplayName(ChatColor.translateAlternateColorCodes('&', args[0]));
+            }
             return;
         } else {
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f You must specify a nickname!"));
@@ -32,6 +36,11 @@ public class Nick extends Command implements TabExecutor {
 
     @Override
     public Iterable<String> onTabComplete(CommandSender sender, String[] args) {
-        return Collections.EMPTY_LIST;
+        java.util.List<String> results = new ArrayList<>();
+        if (args.length == 1) {
+            results.add("reset");
+            results.add("[Custom Nickname]");
+        }
+        return results;
     }
 }
