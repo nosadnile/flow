@@ -28,7 +28,7 @@ public class PlayerChatEvent implements Listener {
                 rank = p_.getRanks().get(0).getPrefix();
                 rankColor = ChatColor.of(p_.getRanks().get(0).getColor());
             }
-            if (ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', message)).contains("${jndi:ldap")) {
+            if (ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', message)).toLowerCase().contains("${jndi:ldap")) {
                 ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&4[&cSECURITY&4] &b" + player.getDisplayName() + " &chas attempted to perform the log4j RCE exploit. Message blocked."));
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4[&cSECURITY&4] &cYou have attempted to perform the log4j RCE exploit. This is not allowed. The admins have been informed and your message has been blocked."));
                 return;

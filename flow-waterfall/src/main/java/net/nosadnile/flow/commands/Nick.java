@@ -2,6 +2,7 @@ package net.nosadnile.flow.commands;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.TabExecutor;
@@ -22,6 +23,11 @@ public class Nick extends Command implements TabExecutor {
         if(args.length == 1) {
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Setting your nickname to: " + args[0]));
             ProxiedPlayer player = (ProxiedPlayer) sender;
+            if (ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', args[0])).toLowerCase().contains("${jndi:ldap")) {
+                ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&4[&cSECURITY&4] &b" + sender.getName() + " &chas attempted to perform the log4j RCE exploit. Message blocked."));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4[&cSECURITY&4] &cYou have attempted to perform the log4j RCE exploit. This is not allowed. The admins have been informed and your message has been blocked."));
+                return;
+            }
             if (args[0].equalsIgnoreCase("reset")) {
                 player.setDisplayName(player.getName());
             } else {
