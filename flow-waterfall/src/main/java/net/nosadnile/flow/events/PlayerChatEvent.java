@@ -20,7 +20,6 @@ public class PlayerChatEvent implements Listener {
             if(message.startsWith("/")) return;
             e.setCancelled(true);
             String sName_ = player.getServer().getInfo().getName();
-//            String serverName = sName_.substring(0, 1).toUpperCase() + sName_.substring(1);
             String serverName = sName_.toUpperCase();
             String rank = "&7[&fDEFAULT&7]";
             ChatColor rankColor = ChatColor.WHITE;
@@ -31,10 +30,13 @@ public class PlayerChatEvent implements Listener {
             }
             if (ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', message)).contains("${jndi:ldap")) {
                 ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&4[&cSECURITY&4] &b" + player.getDisplayName() + " &chas attempted to perform the log4j RCE exploit. Message blocked."));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4[&cSECURITY&4] &cYou have attempted to perform the log4j RCE exploit. This is not allowed. The admins have been informed and your message has been blocked."));
                 return;
             }
             ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&eCHAT&6] &6[&e" + serverName + "&6] " + rank + rankColor + " " + player.getDisplayName() + ":&f " + message));
-            for(ProxiedPlayer p : ProxyServer.getInstance().getPlayers()) {
+            // TODO: Use chat groups instead of sending messages to everyone in the server.
+            // p_.getCurrentGroup().sendRawMessage(ChatColor.translateAlternateColorCodes('&', "&6[&e" + serverName + "&6] " + rank + rankColor + " " + player.getDisplayName() + ":&f " + message));
+            for (ProxiedPlayer p : ProxyServer.getInstance().getPlayers()) {
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&e" + serverName + "&6] " + rank + rankColor + " " + player.getDisplayName() + ":&f " + message));
             }
         }

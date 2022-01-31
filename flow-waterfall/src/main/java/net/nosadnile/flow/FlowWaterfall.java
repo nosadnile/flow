@@ -58,6 +58,14 @@ public class FlowWaterfall extends Plugin {
         ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Registered command &aLobby&f!"));
         ProxyServer.getInstance().getPluginManager().registerCommand(this, new Rank());
         ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Registered command &aRank&f!"));
+        ProxyServer.getInstance().getPluginManager().registerCommand(this, new Message());
+        ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Registered command &aMessage&f!"));
+        ProxyServer.getInstance().getPluginManager().registerCommand(this, new Respond());
+        ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Registered command &aRespond&f!"));
+        ProxyServer.getInstance().getPluginManager().registerCommand(this, new List());
+        ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Registered command &aList&f!"));
+        ProxyServer.getInstance().getPluginManager().registerCommand(this, new Restart());
+        ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Registered command &aRestart&f!"));
         ProxyServer.getInstance().getPluginManager().registerListener(this, new PlayerChatEvent());
         ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f Registered event &aPlayerChatEvent&f!"));
         ProxyServer.getInstance().getPluginManager().registerListener(this, new PlayerLoginEvent());

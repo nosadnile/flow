@@ -87,10 +87,12 @@ public class Server extends Command implements TabExecutor {
         List<String> servers = new ArrayList<>();
         List<String> players = new ArrayList<>();
         for(String s : ProxyServer.getInstance().getServers().keySet()) {
-            servers.add(s);
+            if (s.contains(args[0])) {
+                servers.add(s);
+            }
         }
         for(ProxiedPlayer p : ProxyServer.getInstance().getPlayers()) {
-            if(p.isConnected()) {
+            if (p.getName().contains(args[1])) {
                 players.add(p.getName());
             }
         }

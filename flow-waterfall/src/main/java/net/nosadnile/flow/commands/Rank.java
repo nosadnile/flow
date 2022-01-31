@@ -127,29 +127,41 @@ public class Rank extends Command implements TabExecutor {
         } else if(args.length == 2) {
             if(args[0].equalsIgnoreCase("create")) {
                 for(PlayerRank r : FlowWaterfall.rankManager.getRanks().values()) {
-                    results.add(r.getName());
+                    if (r.getName().contains(args[1])) {
+                        results.add(r.getName());
+                    }
                 }
             } else if(args[0].equalsIgnoreCase("delete")) {
                 for(PlayerRank r : FlowWaterfall.rankManager.getRanks().values()) {
-                    results.add(r.getName());
+                    if (r.getName().contains(args[1])) {
+                        results.add(r.getName());
+                    }
                 }
             } else if(args[0].equalsIgnoreCase("modify")) {
                 for(PlayerRank r : FlowWaterfall.rankManager.getRanks().values()) {
-                    results.add(r.getName());
+                    if (r.getName().contains(args[1])) {
+                        results.add(r.getName());
+                    }
                 }
             } else if(args[0].equalsIgnoreCase("give")) {
                 for(PlayerRank r : FlowWaterfall.rankManager.getRanks().values()) {
-                    results.add(r.getName());
+                    if (r.getName().contains(args[1])) {
+                        results.add(r.getName());
+                    }
                 }
             } else if(args[0].equalsIgnoreCase("revoke")) {
                 for(PlayerRank r : FlowWaterfall.rankManager.getRanks().values()) {
-                    results.add(r.getName());
+                    if (r.getName().contains(args[1])) {
+                        results.add(r.getName());
+                    }
                 }
             }
         } else if(args.length == 3) {
             if(args[0].equalsIgnoreCase("create")) {
                 for(ChatColor c : ChatColor.values()) {
-                    results.add(c.getName());
+                    if (c.getName().contains(args[2])) {
+                        results.add(c.getName());
+                    }
                 }
             } else if(args[0].equalsIgnoreCase("modify")) {
                 results.add("permissions");
@@ -157,11 +169,15 @@ public class Rank extends Command implements TabExecutor {
                 results.add("color");
             } else if(args[0].equalsIgnoreCase("give")) {
                 for(ProxiedPlayer p : ProxyServer.getInstance().getPlayers()) {
-                    results.add(p.getName());
+                    if (p.getName().contains(args[2])) {
+                        results.add(p.getName());
+                    }
                 }
             } else if(args[0].equalsIgnoreCase("revoke")) {
                 for(ProxiedPlayer p : ProxyServer.getInstance().getPlayers()) {
-                    results.add(p.getName());
+                    if (p.getName().contains(args[2])) {
+                        results.add(p.getName());
+                    }
                 }
             }
         } else if(args.length == 4) {
@@ -170,7 +186,9 @@ public class Rank extends Command implements TabExecutor {
             } else if(args[0].equalsIgnoreCase("modify")) {
                 if(args[1].equalsIgnoreCase("color")) {
                     for(ChatColor c : ChatColor.values()) {
-                        results.add(c.getName());
+                        if (c.getName().contains(args[3])) {
+                            results.add(c.getName());
+                        }
                     }
                 } else if(args[1].equalsIgnoreCase("permissions")) {
                     results.add("[Permission Name]");
