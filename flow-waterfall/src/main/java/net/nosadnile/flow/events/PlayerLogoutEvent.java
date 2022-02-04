@@ -12,7 +12,7 @@ public class PlayerLogoutEvent implements Listener {
     @EventHandler
     public void onSwitch(PlayerDisconnectEvent e) {
         for (ProxiedPlayer player : ProxyServer.getInstance().getPlayers()) {
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f &a" + e.getPlayer().getDisplayName() + "&f has switched to server &b" + e.getPlayer().getServer().getInfo().getName().toUpperCase() + "&f!"));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f &a" + e.getPlayer().getDisplayName() + "&f has left."));
         }
         FlowWaterfall.players.onLogout(e.getPlayer());
     }
