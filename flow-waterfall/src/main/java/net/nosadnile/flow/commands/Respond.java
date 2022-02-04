@@ -2,6 +2,7 @@ package net.nosadnile.flow.commands;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.TabExecutor;
 import net.nosadnile.flow.FlowWaterfall;
@@ -33,6 +34,11 @@ public class Respond extends Command implements TabExecutor {
         }
         if (!playerTo.isOnline()) {
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[&f!&6]&f That player is not online!"));
+            return;
+        }
+        if (ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', message)).toLowerCase().contains("${jndi:ldap")) {
+            ProxyServer.getInstance().getConsole().sendMessage(ChatColor.translateAlternateColorCodes('&', "&4[&cSECURITY&4] &b" + sender.getName() + " &chas attempted to perform the log4j RCE exploit. Message blocked."));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4[&cSECURITY&4] &cYou have attempted to perform the log4j RCE exploit. This is not allowed. The admins have been informed and your message has been blocked."));
             return;
         }
         playerTo.get().sendMessage(ChatColor.translateAlternateColorCodes('&', "&b[" + sender.getName() + " -> You] &f" + message));
