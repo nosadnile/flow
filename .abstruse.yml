@@ -2,8 +2,8 @@ image: ubuntu:focal
 
 before_install:
     - apt-get update
-    - apt-get -y upgrade
-    - apt-get -y install openjdk-17-jre openjdk-17-jdk gradle maven
+    - DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
+    - DEBIAN_FRONTEND=noninteractive apt-get -y install openjdk-17-jre openjdk-17-jdk gradle maven
 
 install:
     - chmod +x gradlew
