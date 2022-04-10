@@ -1,0 +1,15 @@
+image: ubuntu:focal
+
+before_install:
+    - apt-get update
+    - apt-get -y upgrade
+    - apt-get -y install openjdk-17-jre openjdk-17-jdk gradle maven
+
+install:
+    - chmod +x gradlew
+
+script:
+    - ./gradlew build
+
+cache:
+    - .gradle
