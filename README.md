@@ -1,4 +1,5 @@
 # NoSadNile Network | Flow
+[![Build Status](https://ci.nosadnile.net/job/Flow/badge/icon?style=flat-square)](https://ci.nosadnile.net/job/Flow/)
 
 The source code for the NoSadNile main plugin.
 
