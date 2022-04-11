@@ -1,9 +1,0 @@
-pipeline:
-  build:
-    image: ubuntu:focal
-    commands:
-      - apt-get update
-      - DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
-      - DEBIAN_FRONTEND=noninteractive apt-get -y install openjdk-17-jre openjdk-17-jdk gradle maven
-      - chmod +x gradlew
-      - ./gradlew build
