@@ -51,7 +51,7 @@ jobs:
           bodyFile: "body.md"
           token: ${{ secrets.ACCESS_TOKEN }}
           name: ci-${{ steps.vars.outputs.sha_short }}
-          prerelease: true
+          prerelease: false
           tag: ${{ steps.vars.outputs.sha_short }}
           allowUpdates: true
       - name: Upload waterfall artifact
