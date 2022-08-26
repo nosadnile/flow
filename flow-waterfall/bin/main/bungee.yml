@@ -1,4 +1,0 @@
-name: Flow
-version: '${version}'
-main: net.nosadnile.flow.FlowWaterfall
-description: The NoSadNile Network's main plugin.
