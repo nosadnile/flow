@@ -52,6 +52,8 @@ dependencies {
 
     implementation("org.mongodb:mongo-java-driver:2.12.3")
     implementation("com.google.guava:guava:31.0.1-jre")
+
+    implementation(project(":flow-common"))
 }
 
 java {

@@ -3,3 +3,5 @@ database:
   port: 27017
   user: MyUsername
   pass: MyPassword
+  usePass: true
+  anon: false

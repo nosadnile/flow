@@ -9,6 +9,7 @@ import java.net.UnknownHostException;
 public class FlowDatabaseAPI {
     private MongoClient dbClient;
     private DatabaseCredentials credentials;
+    public boolean connected = false;
 
     public MongoClient getClient() {
         return this.dbClient;
@@ -41,9 +42,13 @@ public class FlowDatabaseAPI {
         MongoClientURI connectionURI = new MongoClientURI(connectionString);
 
         this.dbClient = new MongoClient(connectionURI);
+
+        this.connected = true;
     }
 
     public void disconnect() {
         this.dbClient.close();
+
+        this.connected = false;
     }
 }
