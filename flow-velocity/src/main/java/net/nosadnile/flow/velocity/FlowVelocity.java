@@ -25,6 +25,7 @@ import net.nosadnile.flow.velocity.events.ServerSwitchEventHandler;
 import net.nosadnile.flow.velocity.util.ColorUtil;
 import org.slf4j.Logger;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -52,6 +53,32 @@ public class FlowVelocity {
         FlowVelocity.commandManager = server.getCommandManager();
         FlowVelocity.logger = logger;
         FlowVelocity.dataDirectory = dataDirectory;
+
+        // =========================== Begin init ===========================
+
+        String defaultConfig = "database:\n" +
+                "  host: localhost\n" +
+                "  port: 27017\n" +
+                "  user: MyUsername\n" +
+                "  pass: MyPassword\n" +
+                "  usePass: true\n" +
+                "  anon: false\n";
+
+        if (!dataDirectory.toFile().exists()) {
+            dataDirectory.toFile().mkdirs();
+        }
+
+        Path configPath = dataDirectory.resolve("config.yml");
+        if (!configPath.toFile().exists()) {
+            try {
+                configPath.toFile().createNewFile();
+                FileOutputStream fos = new FileOutputStream(configPath.toFile());
+                fos.write(defaultConfig.getBytes());
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Subscribe
