@@ -6,9 +6,6 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
-group = "net.nosadnile"
-version = "1.0.0"
-
 repositories {
     mavenCentral()
     mavenLocal()
@@ -45,8 +42,16 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":flow-purpur"))
-    implementation(project(":flow-velocity"))
+    compileOnly("org.purpurmc.purpur:purpur-api:1.19-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.19-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot:1.19-R0.1-SNAPSHOT")
+
+    compileOnly("com.github.dmulloy2:ProtocolLib:master-SNAPSHOT")
+    compileOnly("net.luckperms:api:5.3")
+
+    implementation("org.mongodb:mongo-java-driver:2.12.3")
+    implementation("com.google.guava:guava:31.0.1-jre")
 }
 
 java {
