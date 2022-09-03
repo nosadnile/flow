@@ -22,12 +22,14 @@ import net.nosadnile.flow.velocity.events.ChatEventHandler;
 import net.nosadnile.flow.velocity.events.LoginEventHandler;
 import net.nosadnile.flow.velocity.events.LogoutEventHandler;
 import net.nosadnile.flow.velocity.events.ServerSwitchEventHandler;
+import net.nosadnile.flow.velocity.tasks.ServerTickTask;
 import net.nosadnile.flow.velocity.util.ColorUtil;
 import org.slf4j.Logger;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.concurrent.TimeUnit;
 
 @Plugin(
         id = "flow-velocity",
@@ -135,6 +137,11 @@ public class FlowVelocity {
 
         commandManager.register(LobbyCommand.getMeta(), new LobbyCommand());
         server.getConsoleCommandSource().sendMessage(ColorUtil.translateColorCodes('&', "&6[&f!&6]&f Registered command: LobbyCommand"));
+
+        // =========================== Register tasks ===========================
+
+        server.getScheduler().buildTask(this, ServerTickTask::run).repeat(1, TimeUnit.SECONDS).schedule();
+        server.getConsoleCommandSource().sendMessage(ColorUtil.translateColorCodes('&', "&6[&f!&6]&f Registered task: ServerTickTask"));
     }
 
     @Subscribe
