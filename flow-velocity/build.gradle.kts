@@ -29,7 +29,8 @@ dependencies {
 
     implementation("org.mongodb:mongo-java-driver:2.12.3")
     implementation("com.google.guava:guava:31.0.1-jre")
-    implementation("org.yaml:snakeyaml:1.31")
+    implementation("org.yaml:snakeyaml:2.0")
+    implementation("org.javatuples:javatuples:1.2")
 
     implementation(project(":flow-common"))
 }

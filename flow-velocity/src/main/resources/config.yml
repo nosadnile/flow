@@ -5,3 +5,7 @@ database:
   pass: MyPassword
   usePass: true
   anon: false
+
+bans:
+  permanent:
+  temporary:

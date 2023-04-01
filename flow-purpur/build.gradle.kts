@@ -39,16 +39,36 @@ repositories {
         name = "jitpack"
         url = uri("https://jitpack.io/")
     }
+
+    maven {
+        name = "alessiodp"
+        url = uri("https://repo.alessiodp.com/releases/")
+    }
+
+    maven {
+        name = "PlaceholderAPI"
+        url = uri("https://repo.extendedclip.com/content/repositories/placeholderapi/")
+    }
+
+    maven {
+        name = "SimonStators-Repo"
+        url = uri("https://simonsator.de/repo/")
+    }
 }
 
 dependencies {
-    compileOnly("org.purpurmc.purpur:purpur-api:1.19-R0.1-SNAPSHOT")
-    compileOnly("io.papermc.paper:paper-api:1.19-R0.1-SNAPSHOT")
-    compileOnly("org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT")
-    compileOnly("org.spigotmc:spigot:1.19-R0.1-SNAPSHOT")
+    compileOnly("org.purpurmc.purpur:purpur-api:1.19.4-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot:1.19.4-R0.1-SNAPSHOT")
 
-    compileOnly("com.github.dmulloy2:ProtocolLib:master-SNAPSHOT")
     compileOnly("net.luckperms:api:5.3")
+    compileOnly("org.bstats:bstats-bukkit:3.0.0")
+    compileOnly("de.simonsator:Party-and-Friends-MySQL-Edition-Spigot-API:1.5.3")
+    compileOnly("de.simonsator:Spigot-Party-API-For-RedisBungee:1.0.3-SNAPSHOT")
+    compileOnly("de.simonsator:DevelopmentPAFSpigot:1.0.67")
+    compileOnly("com.alessiodp.parties:parties-api:3.2.4")
+    compileOnly("me.clip:placeholderapi:2.11.3")
 
     implementation("org.mongodb:mongo-java-driver:2.12.3")
     implementation("com.google.guava:guava:31.0.1-jre")

@@ -1,10 +1,13 @@
 package net.nosadnile.flow.api.database;
 
 import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 import net.nosadnile.flow.api.errors.NoCredentialsException;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FlowDatabaseAPI {
     private MongoClient dbClient;
@@ -24,24 +27,24 @@ public class FlowDatabaseAPI {
             throw new NoCredentialsException();
         }
 
-        String connectionString = "mongodb://";
+        System.out.println("Host: " + this.credentials.getHost() + " | Port: " + this.credentials.getPort());
 
-        if (this.credentials.isAnonymous()) {
-            connectionString += credentials.getHost() + ":" + credentials.getPort();
-        } else if (this.credentials.hasPassword()) {
-            connectionString += (
-                    this.credentials.getUsername() + ":"
-                            + this.credentials.getPassword()
-                            + "@" + this.credentials.getHost()
-                            + ":" + this.credentials.getPort()
-            );
-        } else {
-            connectionString += this.credentials.getUsername() + "@" + this.credentials.getHost() + ":" + this.credentials.getPort();
+        ServerAddress addr = new ServerAddress(this.credentials.getHost(), this.credentials.getPort());
+        List<MongoCredential> credentials = new ArrayList<>();
+
+        if (!this.credentials.isAnonymous()) {
+            if (this.credentials.hasPassword()) {
+                MongoCredential credential = MongoCredential.createPlainCredential(this.credentials.getUsername(), "admin", this.credentials.getPassword().toCharArray());
+
+                credentials.add(credential);
+            } else {
+                MongoCredential credential = MongoCredential.createPlainCredential(this.credentials.getUsername(), "admin", null);
+
+                credentials.add(credential);
+            }
         }
 
-        MongoClientURI connectionURI = new MongoClientURI(connectionString);
-
-        this.dbClient = new MongoClient(connectionURI);
+        this.dbClient = new MongoClient(addr, credentials);
 
         this.connected = true;
     }

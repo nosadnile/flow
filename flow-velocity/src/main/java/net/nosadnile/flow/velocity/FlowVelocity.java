@@ -12,6 +12,7 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.nosadnile.flow.api.database.FlowDatabaseAPI;
+import net.nosadnile.flow.velocity.bans.BanManager;
 import net.nosadnile.flow.velocity.commands.ListCommand;
 import net.nosadnile.flow.velocity.commands.LobbyCommand;
 import net.nosadnile.flow.velocity.commands.ServerCommand;
@@ -34,7 +35,7 @@ import java.util.concurrent.TimeUnit;
 @Plugin(
         id = "flow-velocity",
         name = "Flow",
-        version = "1.2.0",
+        version = "1.3.0",
         description = "Powering the NoSadNile Network since 2022.",
         url = "https://www.nosadnile.net/",
         authors = {"RedstoneWizard08", "NoSadBeHappy", "KingGoldGolem", "EverestPlayer", "CloudWolf818"}
@@ -48,6 +49,7 @@ public class FlowVelocity {
     public static LuckPerms luckPerms;
     public static ConfigManager configManager;
     public static FlowDatabaseAPI database;
+    public static BanManager banManager;
 
     @Inject
     public FlowVelocity(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory) {
@@ -55,6 +57,7 @@ public class FlowVelocity {
         FlowVelocity.commandManager = server.getCommandManager();
         FlowVelocity.logger = logger;
         FlowVelocity.dataDirectory = dataDirectory;
+        FlowVelocity.banManager = new BanManager();
 
         // =========================== Begin init ===========================
 
@@ -106,12 +109,21 @@ public class FlowVelocity {
 
         try {
             database.connect();
+
             server.getConsoleCommandSource().sendMessage(ColorUtil.translateColorCodes('&', "&6[&f!&6]&f Connected to database!"));
         } catch (Exception e) {
             server.getConsoleCommandSource().sendMessage(
                     ColorUtil.translateColorCodes('&', "&6[&f!&6]&f Problem connecting to database: " + e.getMessage())
             );
         }
+
+        // =========================== Load bans ===========================
+
+//        try {
+//            banManager.load();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
         // =========================== Register events ===========================
 

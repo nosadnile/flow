@@ -17,6 +17,7 @@ public class ConfigAccessor {
 
     public static ConfigManager getConfig() throws IOException {
         YamlHandler handler = new YamlHandler(getConfigFile());
+
         return new ConfigManager(handler);
     }
 }

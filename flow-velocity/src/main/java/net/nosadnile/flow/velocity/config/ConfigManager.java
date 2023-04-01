@@ -188,6 +188,10 @@ public class ConfigManager {
         }
     }
 
+    public void setStringArray(String key, String[] arr) {
+        this.setValue(key, arr);
+    }
+
     public boolean[] getBooleanArray(String key) {
         Object value = this.getValue(key);
         if (value instanceof boolean[]) {
