@@ -1,4 +1,8 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
-    "nuxt.isNuxtApp": false
+    "nuxt.isNuxtApp": false,
+    "java.compile.nullAnalysis.mode": "automatic",
+    "yaml.schemas": {
+        "https://json.schemastore.org/bukkit-plugin.json": "file:///home/jacob/flow/flow-purpur/src/main/resources/plugin.yml"
+    }
 }

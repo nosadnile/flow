@@ -1,0 +1,11 @@
+database:
+  host: localhost
+  port: 27017
+  user: MyUsername
+  pass: MyPassword
+  usePass: true
+  anon: false
+
+bans:
+  permanent:
+  temporary:

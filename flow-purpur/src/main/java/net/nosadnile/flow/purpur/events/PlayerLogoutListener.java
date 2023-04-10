@@ -6,6 +6,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerLogoutListener implements Listener {
     @EventHandler
+    @SuppressWarnings("deprecation")
     public void onLogout(PlayerQuitEvent e) {
         e.setQuitMessage("");
     }
