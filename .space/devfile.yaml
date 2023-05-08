@@ -6,7 +6,6 @@ attributes:
       type: Fleet
 components:
 - name: image-build
-  image:
   imageName: space-web:latest
   dockerfile:
     buildContext: .space
