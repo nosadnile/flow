@@ -1,8 +1,8 @@
 job("Build and publish") {
-    container(displayName = "Gradle publish", image = "amazoncorretto:17-alpine") {
+    container(displayName = "Gradle publish", image = "gradle") {
         kotlinScript { api ->
-            api.gradlew("build")
-            api.gradlew("getLoginFromEnv", "publish")
+            api.gradle("build")
+            api.gradle("getLoginFromEnv", "publish")
         }
     }
 }
