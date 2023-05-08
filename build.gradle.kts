@@ -6,8 +6,8 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
-group = "net.nosadnile"
-version = "1.2.0"
+group = project.property("maven_group")!!
+version = project.property("version")!!
 
 repositories {
     mavenCentral()
