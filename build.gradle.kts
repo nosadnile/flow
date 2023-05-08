@@ -56,3 +56,17 @@ java {
 tasks.named("build") {
     dependsOn(tasks.shadowJar)
 }
+
+tasks.create("getLoginFromEnv") {
+    doLast {
+        val key = System.getenv("JB_SPACE_CLIENT_ID")
+        val secret = System.getenv("JB_SPACE_CLIENT_SECRET")
+
+        if (key == null || secret == null) {
+            throw GradleException("spaceUsername and/or spacePassword are not defined environment variables")
+        }
+
+        System.setProperty("space.username", key)
+        System.setProperty("space.password", secret)
+    }
+}

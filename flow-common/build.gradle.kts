@@ -55,3 +55,25 @@ java {
 tasks.named("build") {
     dependsOn(tasks.shadowJar)
 }
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "net.nosadnile.flow"
+            artifactId = "api"
+            version = version
+
+            from(components["java"])
+        }
+    }
+    repositories {
+        maven {
+            url = uri("https://maven.pkg.jetbrains.space/nosadnile/p/main/maven")
+
+            credentials {
+                username = System.getProperty("space.username")
+                password = System.getProperty("space.password")
+            }
+        }
+    }
+}
