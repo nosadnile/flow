@@ -13,6 +13,12 @@ import java.util.List;
 import java.util.Optional;
 
 public class ServerCommand implements SimpleCommand {
+    public static CommandMeta getMeta() {
+        return FlowVelocity.commandManager.metaBuilder("server")
+                .aliases("switch")
+                .build();
+    }
+
     @Override
     public void execute(Invocation invocation) {
         CommandSource sender = invocation.source();
@@ -107,11 +113,5 @@ public class ServerCommand implements SimpleCommand {
         }
 
         return suggestions;
-    }
-
-    public static CommandMeta getMeta() {
-        return FlowVelocity.commandManager.metaBuilder("server")
-                .aliases("switch")
-                .build();
     }
 }

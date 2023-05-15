@@ -11,6 +11,7 @@ public class CredentialConfig {
         String host = FlowVelocity.configManager.getString("database.host");
         String user = FlowVelocity.configManager.getString("database.user");
         String pass = FlowVelocity.configManager.getString("database.pass");
+        String database = FlowVelocity.configManager.getString("database.name");
 
         int port = FlowVelocity.configManager.getInt("database.port");
 
@@ -18,11 +19,11 @@ public class CredentialConfig {
         boolean anon = FlowVelocity.configManager.getBoolean("database.anon");
 
         if (anon) {
-            return new AnonymousCredentials(host, port);
+            return new AnonymousCredentials(database, host, port);
         } else if (usePassword) {
-            return new PasswordCredentials(user, pass, host, port);
+            return new PasswordCredentials(user, pass, database, host, port);
         } else {
-            return new PasswordlessCredentials(user, host, port);
+            return new PasswordlessCredentials(user, database, host, port);
         }
     }
 }

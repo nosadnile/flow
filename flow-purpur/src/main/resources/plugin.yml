@@ -4,7 +4,7 @@ main: net.nosadnile.flow.purpur.FlowPurpur
 api-version: 1.19
 prefix: FLOW
 load: STARTUP
-depend: [ ProtocolLib ]
+depend: [ ]
 authors: [ RedstoneWizard08, NoSadBeHappy, KingGoldGolem, EverestPlayer, CloudWolf818 ]
 description: Powering the NoSadNile Network since 2022.
 website: https://www.nosadnile.net/

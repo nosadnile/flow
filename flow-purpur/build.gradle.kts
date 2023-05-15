@@ -1,9 +1,12 @@
+import net.nosadnile.gradle.serverhelper.dsl.ServerType
+
 plugins {
     id("java")
     id("eclipse")
     id("java-library")
     id("maven-publish")
     id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("net.nosadnile.gradle.serverhelper") version "1.5.0"
 }
 
 repositories {
@@ -54,17 +57,32 @@ repositories {
         name = "SimonStators-Repo"
         url = uri("https://simonsator.de/repo/")
     }
+
+    maven {
+        name = "CodeMC"
+        url = uri("https://repo.codemc.org/repository/maven-public/")
+    }
+
+    maven {
+        name = "Citizens"
+        url = uri("https://maven.citizensnpcs.co/repo")
+    }
 }
 
 dependencies {
-    compileOnly("org.purpurmc.purpur:purpur-api:1.19.4-R0.1-SNAPSHOT")
+    annotationProcessor("dev.jorel:commandapi-annotations:9.0.0")
+
+    compileOnly(dependencyNotation = "org.purpurmc.purpur:purpur-api:1.19.4-R0.1-SNAPSHOT")
     compileOnly("io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT")
     compileOnly("org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT")
-    compileOnly("org.spigotmc:spigot:1.19.4-R0.1-SNAPSHOT")
+    compileOnly(dependencyNotation = "org.spigotmc:spigot:1.19.4-R0.1-SNAPSHOT")
 
     compileOnly("net.luckperms:api:5.3")
     compileOnly("com.comphenix.protocol:ProtocolLib:4.8.0")
 
+    implementation("net.citizensnpcs:citizens-main:2.0.30-SNAPSHOT")
+    implementation("dev.jorel:commandapi-bukkit-shade:9.0.0")
+    implementation("dev.jorel:commandapi-annotations:9.0.0")
     implementation("org.mongodb:mongo-java-driver:2.12.3")
     implementation("com.google.guava:guava:31.0.1-jre")
 
@@ -77,4 +95,11 @@ java {
 
 tasks.named("build") {
     dependsOn(tasks.shadowJar)
+}
+
+serverHelper {
+    getEula().set(true)
+    getServerType().set(ServerType.PURPUR)
+    getServerDirectory().set(project.rootDir.resolve("run"))
+    getMinecraftVersion().set("1.19.4")
 }

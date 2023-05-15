@@ -3,6 +3,7 @@ database:
   port: 27017
   user: MyUsername
   pass: MyPassword
+  name: flow-db
   usePass: true
   anon: false
 

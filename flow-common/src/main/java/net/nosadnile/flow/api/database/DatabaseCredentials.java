@@ -5,6 +5,8 @@ public interface DatabaseCredentials {
 
     String getPassword();
 
+    String getDatabase();
+
     String getHost();
 
     int getPort();

@@ -10,12 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlowDatabaseAPI {
+    public boolean connected = false;
     private MongoClient dbClient;
     private DatabaseCredentials credentials;
-    public boolean connected = false;
+    private String database;
 
     public MongoClient getClient() {
         return this.dbClient;
+    }
+
+    public String getDatabase() {
+        return this.database;
     }
 
     public void login(DatabaseCredentials credentials) {
@@ -31,6 +36,8 @@ public class FlowDatabaseAPI {
 
         ServerAddress addr = new ServerAddress(this.credentials.getHost(), this.credentials.getPort());
         List<MongoCredential> credentials = new ArrayList<>();
+
+        this.database = this.credentials.getDatabase();
 
         if (!this.credentials.isAnonymous()) {
             if (this.credentials.hasPassword()) {

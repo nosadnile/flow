@@ -13,6 +13,12 @@ import java.util.List;
 import java.util.Optional;
 
 public class LobbyCommand implements SimpleCommand {
+    public static CommandMeta getMeta() {
+        return FlowVelocity.commandManager.metaBuilder("lobby")
+                .aliases("hub")
+                .build();
+    }
+
     @Override
     public void execute(Invocation invocation) {
         Optional<RegisteredServer> server = FlowVelocity.server.getServer("lobby");
@@ -75,11 +81,5 @@ public class LobbyCommand implements SimpleCommand {
         }
 
         return suggestions;
-    }
-
-    public static CommandMeta getMeta() {
-        return FlowVelocity.commandManager.metaBuilder("lobby")
-                .aliases("hub")
-                .build();
     }
 }

@@ -2,24 +2,31 @@ package net.nosadnile.flow.api.database;
 
 public class PasswordlessCredentials implements DatabaseCredentials {
     private String username;
+    private String database;
     private String host;
     private int port;
 
-    public PasswordlessCredentials(String username, String host, int port) {
+    public PasswordlessCredentials(String username, String database, String host, int port) {
         this.username = username;
         this.host = host;
         this.port = port;
+        this.database = database;
     }
 
-    public PasswordlessCredentials(String username, String host) {
+    public PasswordlessCredentials(String username, String database, String host) {
         this.username = username;
         this.host = host;
         this.port = 27017;
+        this.database = database;
     }
 
     @Override
     public String getUsername() {
         return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
@@ -28,13 +35,30 @@ public class PasswordlessCredentials implements DatabaseCredentials {
     }
 
     @Override
+    public String getDatabase() {
+        return this.database;
+    }
+
+    public void setDatabase(String database) {
+        this.database = database;
+    }
+
+    @Override
     public String getHost() {
         return this.host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
     }
 
     @Override
     public int getPort() {
         return this.port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
     }
 
     @Override
@@ -45,17 +69,5 @@ public class PasswordlessCredentials implements DatabaseCredentials {
     @Override
     public boolean isAnonymous() {
         return false;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
     }
 }

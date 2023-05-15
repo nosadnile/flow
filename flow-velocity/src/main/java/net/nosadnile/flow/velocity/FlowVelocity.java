@@ -15,6 +15,7 @@ import net.nosadnile.flow.api.database.FlowDatabaseAPI;
 import net.nosadnile.flow.velocity.bans.BanManager;
 import net.nosadnile.flow.velocity.commands.ListCommand;
 import net.nosadnile.flow.velocity.commands.LobbyCommand;
+import net.nosadnile.flow.velocity.commands.RankCommand;
 import net.nosadnile.flow.velocity.commands.ServerCommand;
 import net.nosadnile.flow.velocity.config.ConfigAccessor;
 import net.nosadnile.flow.velocity.config.ConfigManager;
@@ -23,6 +24,7 @@ import net.nosadnile.flow.velocity.events.ChatEventHandler;
 import net.nosadnile.flow.velocity.events.LoginEventHandler;
 import net.nosadnile.flow.velocity.events.LogoutEventHandler;
 import net.nosadnile.flow.velocity.events.ServerSwitchEventHandler;
+import net.nosadnile.flow.velocity.ranks.RankManager;
 import net.nosadnile.flow.velocity.tasks.ServerTickTask;
 import net.nosadnile.flow.velocity.util.ColorUtil;
 import org.slf4j.Logger;
@@ -50,34 +52,56 @@ public class FlowVelocity {
     public static ConfigManager configManager;
     public static FlowDatabaseAPI database;
     public static BanManager banManager;
+    public static RankManager rankManager;
+    public static FlowVelocity INSTANCE;
 
     @Inject
     public FlowVelocity(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory) {
         FlowVelocity.server = server;
         FlowVelocity.commandManager = server.getCommandManager();
         FlowVelocity.logger = logger;
-        FlowVelocity.dataDirectory = dataDirectory;
+        FlowVelocity.dataDirectory = dataDirectory.toAbsolutePath();
         FlowVelocity.banManager = new BanManager();
+        FlowVelocity.rankManager = new RankManager();
+        FlowVelocity.INSTANCE = this;
 
-        // =========================== Begin init ===========================
+        this.doInit();
+    }
 
-        String defaultConfig = "database:\n" +
-                "  host: localhost\n" +
-                "  port: 27017\n" +
-                "  user: MyUsername\n" +
-                "  pass: MyPassword\n" +
-                "  usePass: true\n" +
-                "  anon: false\n";
+    public void doInit() {
+        // =========================== Begin initialization ===========================
 
-        if (!dataDirectory.toFile().exists()) {
-            dataDirectory.toFile().mkdirs();
-        }
+        String defaultConfig = """
+                database:
+                  host: localhost
+                  port: 27017
+                  user: MyUsername
+                  pass: MyPassword
+                  name: flow-db
+                  usePass: true
+                  anon: false
+                                
+                bans:
+                  permanent:
+                  temporary:
+                """;
 
-        Path configPath = dataDirectory.resolve("config.yml");
+        // =========================== Setup config dir ===========================
+
+        boolean mkdirs = FlowVelocity.dataDirectory.toFile().mkdirs();
+
+        if (!mkdirs) return;
+
+        // =========================== Save default config ===========================
+
+        Path configPath = FlowVelocity.dataDirectory.resolve("config.yml");
+
         if (!configPath.toFile().exists()) {
             try {
-                configPath.toFile().createNewFile();
+                if (!configPath.toFile().createNewFile()) return;
+
                 FileOutputStream fos = new FileOutputStream(configPath.toFile());
+
                 fos.write(defaultConfig.getBytes());
                 fos.close();
             } catch (IOException e) {
@@ -88,10 +112,15 @@ public class FlowVelocity {
 
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
-        // =========================== Connect to LuckPerms ===========================
+        // =========================== Check for config ===========================
+
+        if (FlowVelocity.configManager == null)
+            this.doInit();
+
+        // =========================== Connect to LuckPermsHook ===========================
 
         luckPerms = LuckPermsProvider.get();
-        server.getConsoleCommandSource().sendMessage(ColorUtil.translateColorCodes('&', "&6[&f!&6]&f LuckPerms connected!"));
+        server.getConsoleCommandSource().sendMessage(ColorUtil.translateColorCodes('&', "&6[&f!&6]&f LuckPermsHook connected!"));
 
         // =========================== Load config ===========================
 
@@ -125,6 +154,10 @@ public class FlowVelocity {
 //            e.printStackTrace();
 //        }
 
+        // =========================== Load ranks ===========================
+
+        rankManager.load();
+
         // =========================== Register events ===========================
 
         server.getEventManager().register(this, new ChatEventHandler());
@@ -150,6 +183,9 @@ public class FlowVelocity {
         commandManager.register(LobbyCommand.getMeta(), new LobbyCommand());
         server.getConsoleCommandSource().sendMessage(ColorUtil.translateColorCodes('&', "&6[&f!&6]&f Registered command: LobbyCommand"));
 
+        commandManager.register(RankCommand.getMeta(), RankCommand.create(FlowVelocity.server));
+        server.getConsoleCommandSource().sendMessage(ColorUtil.translateColorCodes('&', "&6[&f!&6]&f Registered command: RankCommand"));
+
         // =========================== Register tasks ===========================
 
         server.getScheduler().buildTask(this, ServerTickTask::run).repeat(1, TimeUnit.SECONDS).schedule();
@@ -158,9 +194,17 @@ public class FlowVelocity {
 
     @Subscribe
     public void onProxyShutdown(ProxyShutdownEvent event) {
+        // =========================== Kick all players ===========================
+
         for (Player player : server.getAllPlayers()) {
             player.disconnect(ColorUtil.translateColorCodes('&', "&6Server restarting."));
         }
+
+        // =========================== Save ranks ===========================
+
+        rankManager.save();
+
+        // =========================== Disconnect from database ===========================
 
         if (database.connected) {
             database.disconnect();

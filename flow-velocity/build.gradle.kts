@@ -1,9 +1,12 @@
+import net.nosadnile.gradle.serverhelper.dsl.ServerType
+
 plugins {
     id("java")
     id("eclipse")
     id("java-library")
     id("maven-publish")
     id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("net.nosadnile.gradle.serverhelper") version "1.5.0"
 }
 
 repositories {
@@ -25,7 +28,7 @@ dependencies {
     compileOnly("com.velocitypowered:velocity-api:3.1.1")
     annotationProcessor("com.velocitypowered:velocity-api:3.1.1")
 
-    compileOnly("net.luckperms:api:5.3")
+    compileOnly("net.luckperms:api:5.4")
 
     implementation("org.mongodb:mongo-java-driver:2.12.3")
     implementation("com.google.guava:guava:31.0.1-jre")
@@ -41,4 +44,11 @@ java {
 
 tasks.named("build") {
     dependsOn(tasks.shadowJar)
+}
+
+serverHelper {
+    getEula().set(true)
+    getServerType().set(ServerType.VELOCITY)
+    getServerDirectory().set(project.rootDir.resolve("run-proxy"))
+    getMinecraftVersion().set("3.1.1")
 }

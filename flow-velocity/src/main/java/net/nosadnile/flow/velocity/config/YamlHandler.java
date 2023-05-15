@@ -12,7 +12,7 @@ public class YamlHandler {
     private String fileContents;
     private Map<String, Object> config;
     private Path filePath;
-    private File file;
+    private final File file;
 
     public YamlHandler(File file) throws IOException {
         this.file = file;
@@ -46,12 +46,12 @@ public class YamlHandler {
         return this.config;
     }
 
-    public String getFileContents() {
-        return this.fileContents;
-    }
-
     public void setConfig(Map<String, Object> config) {
         this.config = config;
+    }
+
+    public String getFileContents() {
+        return this.fileContents;
     }
 
     public void saveConfig() throws IOException {
