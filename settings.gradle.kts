@@ -1,5 +1,8 @@
 pluginManagement {
     repositories {
+        mavenCentral()
+        gradlePluginPortal()
+
         maven {
             name = "nosadnile-maven"
             url = uri("https://repo.nosadnile.net/releases")
