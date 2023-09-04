@@ -1,10 +1,10 @@
 name: Flow
-version: 1.2.0
+version: 1.3.0
 main: net.nosadnile.flow.purpur.FlowPurpur
-api-version: 1.19
+api-version: 1.20
 prefix: FLOW
 load: STARTUP
-depend: [ ]
-authors: [ RedstoneWizard08, NoSadBeHappy, KingGoldGolem, EverestPlayer, CloudWolf818 ]
+depend: [ Citizens ]
+authors: [ RedstoneWizard08, NoSadBeHappy, KingGoldGolem, EverestPlayer, CloudWolf818, Nionics ]
 description: Powering the NoSadNile Network since 2022.
 website: https://www.nosadnile.net/

@@ -12,6 +12,7 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.nosadnile.flow.api.database.FlowDatabaseAPI;
+import net.nosadnile.flow.api.util.ColorUtil;
 import net.nosadnile.flow.velocity.bans.BanManager;
 import net.nosadnile.flow.velocity.commands.ListCommand;
 import net.nosadnile.flow.velocity.commands.LobbyCommand;
@@ -26,7 +27,6 @@ import net.nosadnile.flow.velocity.events.LogoutEventHandler;
 import net.nosadnile.flow.velocity.events.ServerSwitchEventHandler;
 import net.nosadnile.flow.velocity.ranks.RankManager;
 import net.nosadnile.flow.velocity.tasks.ServerTickTask;
-import net.nosadnile.flow.velocity.util.ColorUtil;
 import org.slf4j.Logger;
 
 import java.io.FileOutputStream;

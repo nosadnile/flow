@@ -5,6 +5,7 @@ import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import net.nosadnile.flow.purpur.commands.NPCCommand;
 import net.nosadnile.flow.purpur.events.PlayerLoginListener;
 import net.nosadnile.flow.purpur.events.PlayerLogoutListener;
+import net.nosadnile.flow.purpur.sidebar.SidebarManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -35,6 +36,7 @@ public class FlowPurpur extends JavaPlugin {
         FlowPurpur.random = new Random();
 
         NPCCommand.register();
+        SidebarManager.createSidebar();
     }
 
     @Override

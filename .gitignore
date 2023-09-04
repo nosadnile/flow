@@ -118,5 +118,5 @@ run/
 !gradle-wrapper.jar
 
 .vscode
-/run/
-/run-proxy/
+run
+run-proxy

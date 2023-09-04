@@ -3,7 +3,7 @@ package net.nosadnile.flow.velocity.commands.rank;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
 import com.velocitypowered.api.command.CommandSource;
-import net.nosadnile.flow.velocity.util.ColorUtil;
+import net.nosadnile.flow.api.util.ColorUtil;
 
 public class RankHelpCommand {
     public static int showHelp(CommandContext<CommandSource> ctx) {

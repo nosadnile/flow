@@ -3,8 +3,8 @@ package net.nosadnile.flow.velocity.events;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.DisconnectEvent;
 import com.velocitypowered.api.proxy.Player;
+import net.nosadnile.flow.api.util.ColorUtil;
 import net.nosadnile.flow.velocity.FlowVelocity;
-import net.nosadnile.flow.velocity.util.ColorUtil;
 import net.nosadnile.flow.velocity.util.TabListSystem;
 
 public class LogoutEventHandler {

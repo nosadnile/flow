@@ -3,8 +3,8 @@ package net.nosadnile.flow.velocity.commands;
 import com.velocitypowered.api.command.CommandMeta;
 import com.velocitypowered.api.command.SimpleCommand;
 import com.velocitypowered.api.proxy.Player;
+import net.nosadnile.flow.api.util.ColorUtil;
 import net.nosadnile.flow.velocity.FlowVelocity;
-import net.nosadnile.flow.velocity.util.ColorUtil;
 
 import java.util.Collections;
 import java.util.List;

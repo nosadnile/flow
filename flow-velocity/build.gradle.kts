@@ -6,7 +6,7 @@ plugins {
     id("java-library")
     id("maven-publish")
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("net.nosadnile.gradle.serverhelper") version "1.5.0"
+    id("net.nosadnile.gradle.serverhelper") version "1.6.0"
 }
 
 repositories {
@@ -47,8 +47,19 @@ tasks.named("build") {
 }
 
 serverHelper {
-    getEula().set(true)
-    getServerType().set(ServerType.VELOCITY)
-    getServerDirectory().set(project.rootDir.resolve("run-proxy"))
-    getMinecraftVersion().set("3.1.1")
+    eula.set(true)
+    serverType.set(ServerType.VELOCITY)
+    serverDirectory.set(project.rootDir.resolve("run-proxy"))
+    minecraftVersion.set("3.1.1")
+
+    proxy {
+        eula.set(true)
+        serverType.set(ServerType.PAPER)
+        minecraftVersion.set("1.20.1")
+        nogui.set(true)
+
+        server("lobby", 25566)
+        server("smp", 25567)
+        server("creative", 25568)
+    }
 }

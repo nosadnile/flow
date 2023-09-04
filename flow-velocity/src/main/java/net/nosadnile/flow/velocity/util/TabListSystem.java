@@ -6,6 +6,7 @@ import com.velocitypowered.api.proxy.player.TabListEntry;
 import com.velocitypowered.api.util.GameProfile;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.nosadnile.flow.api.util.ColorUtil;
 import net.nosadnile.flow.velocity.FlowVelocity;
 
 import java.util.ArrayList;

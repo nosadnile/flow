@@ -10,9 +10,9 @@ import net.luckperms.api.node.Node;
 import net.luckperms.api.node.NodeEqualityPredicate;
 import net.nosadnile.flow.api.database.Entity;
 import net.nosadnile.flow.api.database.FlowDatabaseAPI;
+import net.nosadnile.flow.api.util.ColorUtil;
 import net.nosadnile.flow.velocity.FlowVelocity;
 import net.nosadnile.flow.velocity.hooks.LuckPermsHook;
-import net.nosadnile.flow.velocity.util.ColorUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;

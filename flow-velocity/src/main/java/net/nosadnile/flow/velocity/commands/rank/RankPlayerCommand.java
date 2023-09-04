@@ -5,10 +5,10 @@ import com.mojang.brigadier.context.CommandContext;
 import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.proxy.Player;
 import net.kyori.adventure.text.Component;
+import net.nosadnile.flow.api.util.ColorUtil;
 import net.nosadnile.flow.velocity.FlowVelocity;
 import net.nosadnile.flow.velocity.ranks.Rank;
 import net.nosadnile.flow.velocity.ranks.RankManager;
-import net.nosadnile.flow.velocity.util.ColorUtil;
 
 import java.util.Optional;
 

@@ -4,8 +4,8 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
 import com.velocitypowered.api.command.CommandSource;
 import net.kyori.adventure.text.Component;
+import net.nosadnile.flow.api.util.ColorUtil;
 import net.nosadnile.flow.velocity.ranks.Rank;
-import net.nosadnile.flow.velocity.util.ColorUtil;
 
 public class CreateRankCommand {
     public static int createRank(CommandContext<CommandSource> ctx) {

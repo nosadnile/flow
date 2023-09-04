@@ -6,7 +6,7 @@ plugins {
     id("java-library")
     id("maven-publish")
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("net.nosadnile.gradle.serverhelper") version "1.5.0"
+    id("net.nosadnile.gradle.serverhelper") version "1.6.0"
 }
 
 repositories {
@@ -70,21 +70,22 @@ repositories {
 }
 
 dependencies {
-    annotationProcessor("dev.jorel:commandapi-annotations:9.0.0")
+    annotationProcessor("dev.jorel:commandapi-annotations:9.1.0")
 
-    compileOnly(dependencyNotation = "org.purpurmc.purpur:purpur-api:1.19.4-R0.1-SNAPSHOT")
-    compileOnly("io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT")
-    compileOnly("org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT")
-    compileOnly(dependencyNotation = "org.spigotmc:spigot:1.19.4-R0.1-SNAPSHOT")
+    compileOnly(dependencyNotation = "org.purpurmc.purpur:purpur-api:1.20.1-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT")
+    compileOnly(dependencyNotation = "org.spigotmc:spigot:1.20-R0.1-SNAPSHOT")
 
-    compileOnly("net.luckperms:api:5.3")
-    compileOnly("com.comphenix.protocol:ProtocolLib:4.8.0")
+    compileOnly("net.luckperms:api:5.4")
+    compileOnly("com.comphenix.protocol:ProtocolLib:5.1.0")
+    compileOnly("net.citizensnpcs:citizens-main:2.0.32-SNAPSHOT")
 
-    implementation("net.citizensnpcs:citizens-main:2.0.30-SNAPSHOT")
-    implementation("dev.jorel:commandapi-bukkit-shade:9.0.0")
-    implementation("dev.jorel:commandapi-annotations:9.0.0")
+    implementation("dev.jorel:commandapi-bukkit-shade:9.1.0")
+    implementation("dev.jorel:commandapi-annotations:9.1.0")
     implementation("org.mongodb:mongo-java-driver:2.12.3")
     implementation("com.google.guava:guava:31.0.1-jre")
+    implementation("me.catcoder:bukkit-sidebar:6.2.3-SNAPSHOT")
 
     implementation(project(":flow-common"))
 }
@@ -98,8 +99,10 @@ tasks.named("build") {
 }
 
 serverHelper {
-    getEula().set(true)
-    getServerType().set(ServerType.PURPUR)
-    getServerDirectory().set(project.rootDir.resolve("run"))
-    getMinecraftVersion().set("1.19.4")
+    eula.set(true)
+    jvmArgs.add("-Dfile.encoding=UTF-8")
+    serverArgs.add("-o true")
+    serverType.set(ServerType.PURPUR)
+    serverDirectory.set(project.rootDir.resolve("run"))
+    minecraftVersion.set("1.20.1")
 }

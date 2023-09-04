@@ -8,6 +8,7 @@ import com.velocitypowered.api.command.BrigadierCommand;
 import com.velocitypowered.api.command.CommandMeta;
 import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.proxy.ProxyServer;
+import net.nosadnile.flow.api.util.ColorUtil;
 import net.nosadnile.flow.velocity.FlowVelocity;
 import net.nosadnile.flow.velocity.commands.arguments.EnumArgumentType;
 import net.nosadnile.flow.velocity.commands.arguments.PlayerArgumentType;
@@ -18,7 +19,6 @@ import net.nosadnile.flow.velocity.commands.rank.RankHelpCommand;
 import net.nosadnile.flow.velocity.commands.rank.RankPlayerCommand;
 import net.nosadnile.flow.velocity.commands.rank.edit.ModifyListCommand;
 import net.nosadnile.flow.velocity.commands.rank.edit.ModifyPropertyCommand;
-import net.nosadnile.flow.velocity.util.ColorUtil;
 
 public class RankCommand {
     public static BrigadierCommand create(final ProxyServer proxy) {

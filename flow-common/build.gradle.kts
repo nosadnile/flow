@@ -42,10 +42,13 @@ repositories {
 }
 
 dependencies {
-    compileOnly("net.luckperms:api:5.3")
+    compileOnly("net.luckperms:api:5.4")
 
     implementation("org.mongodb:mongo-java-driver:2.12.3")
     implementation("com.google.guava:guava:31.0.1-jre")
+    implementation("net.kyori:adventure-api:4.14.0")
+    implementation("net.kyori:adventure-text-serializer-plain:4.14.0")
+    implementation("net.kyori:adventure-text-serializer-legacy:4.14.0")
 }
 
 java {

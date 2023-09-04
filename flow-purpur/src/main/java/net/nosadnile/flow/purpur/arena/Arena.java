@@ -1,14 +1,13 @@
 package net.nosadnile.flow.purpur.arena;
 
-import java.util.List;
-
+import net.nosadnile.flow.purpur.team.Team;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
-import net.nosadnile.flow.purpur.team.Team;
+import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class Arena {
@@ -27,12 +26,11 @@ public class Arena {
     public void spawnShopNPC(ShopData data) {
         switch (data.type) {
             case ITEM_SHOP:
-                // TODO: Spawn NPC
+                // TODO: Spawn NPCHelper
                 return;
 
             case TEAM_SHOP:
-                // TODO: Spawn NPC
-                return;
+                // TODO: Spawn NPCHelper
         }
     }
 

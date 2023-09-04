@@ -2,10 +2,10 @@ package net.nosadnile.flow.purpur.team;
 
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.minecraft.util.Tuple;
 import net.nosadnile.flow.purpur.arena.GeneratorData;
 import net.nosadnile.flow.purpur.arena.ShopData;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -15,49 +15,113 @@ import org.bukkit.block.data.type.Bed;
 import org.bukkit.entity.Player;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("deprecation")
 public class Team {
-    public ChatColor color;
+    public NamedTextColor color;
     public Tuple<Location, BlockFace> bedLocation;
 
     public List<Player> players;
     public List<GeneratorData> generators;
     public List<ShopData> shops;
 
+    public Team(NamedTextColor color) {
+        this.color = color;
+        this.bedLocation = null;
+        this.players = new ArrayList<>();
+        this.generators = null;
+        this.shops = null;
+    }
+
     public void spawnBed() {
         Block start = this.bedLocation.a().getBlock();
         BlockFace facing = this.bedLocation.b();
         Material material;
 
-        if (this.color == ChatColor.WHITE) {
+        if (this.color == NamedTextColor.WHITE) {
             material = Material.WHITE_BED;
-        } else if (this.color == ChatColor.GOLD) {
+        } else if (this.color == NamedTextColor.GOLD) {
             material = Material.ORANGE_BED;
-        } else if (this.color == ChatColor.DARK_PURPLE) {
+        } else if (this.color == NamedTextColor.DARK_PURPLE) {
             material = Material.MAGENTA_BED;
-        } else if (this.color == ChatColor.YELLOW) {
+        } else if (this.color == NamedTextColor.YELLOW) {
             material = Material.YELLOW_BED;
-        } else if (this.color == ChatColor.GREEN) {
+        } else if (this.color == NamedTextColor.GREEN) {
             material = Material.LIME_BED;
-        } else if (this.color == ChatColor.GRAY) {
+        } else if (this.color == NamedTextColor.GRAY) {
             material = Material.GRAY_BED;
-        } else if (this.color == ChatColor.AQUA) {
+        } else if (this.color == NamedTextColor.AQUA) {
             material = Material.CYAN_BED;
-        } else if (this.color == ChatColor.LIGHT_PURPLE) {
+        } else if (this.color == NamedTextColor.LIGHT_PURPLE) {
             material = Material.PURPLE_BED;
-        } else if (this.color == ChatColor.BLUE) {
+        } else if (this.color == NamedTextColor.BLUE) {
             material = Material.BLUE_BED;
-        } else if (this.color == ChatColor.RED) {
+        } else if (this.color == NamedTextColor.RED) {
             material = Material.RED_BED;
-        } else if (this.color == ChatColor.BLACK) {
+        } else if (this.color == NamedTextColor.BLACK) {
             material = Material.BLACK_BED;
         } else {
             throw new InvalidParameterException("Unknown bed color!");
         }
 
         this.createBed(start, facing, material);
+    }
+
+    public String getName() {
+        if (this.color == NamedTextColor.WHITE) {
+            return "white";
+        } else if (this.color == NamedTextColor.GOLD) {
+            return "orange";
+        } else if (this.color == NamedTextColor.DARK_PURPLE) {
+            return "magenta";
+        } else if (this.color == NamedTextColor.YELLOW) {
+            return "yellow";
+        } else if (this.color == NamedTextColor.GREEN) {
+            return "lime";
+        } else if (this.color == NamedTextColor.GRAY) {
+            return "gray";
+        } else if (this.color == NamedTextColor.AQUA) {
+            return "cyan";
+        } else if (this.color == NamedTextColor.LIGHT_PURPLE) {
+            return "purple";
+        } else if (this.color == NamedTextColor.BLUE) {
+            return "blue";
+        } else if (this.color == NamedTextColor.RED) {
+            return "red";
+        } else if (this.color == NamedTextColor.BLACK) {
+            return "black";
+        } else {
+            throw new InvalidParameterException("Unknown team color!");
+        }
+    }
+
+    public String getNameCapitalized() {
+        if (this.color == NamedTextColor.WHITE) {
+            return "White";
+        } else if (this.color == NamedTextColor.GOLD) {
+            return "Orange";
+        } else if (this.color == NamedTextColor.DARK_PURPLE) {
+            return "Magenta";
+        } else if (this.color == NamedTextColor.YELLOW) {
+            return "Yellow";
+        } else if (this.color == NamedTextColor.GREEN) {
+            return "Lime";
+        } else if (this.color == NamedTextColor.GRAY) {
+            return "Gray";
+        } else if (this.color == NamedTextColor.AQUA) {
+            return "Cyan";
+        } else if (this.color == NamedTextColor.LIGHT_PURPLE) {
+            return "Purple";
+        } else if (this.color == NamedTextColor.BLUE) {
+            return "Blue";
+        } else if (this.color == NamedTextColor.RED) {
+            return "Red";
+        } else if (this.color == NamedTextColor.BLACK) {
+            return "Black";
+        } else {
+            throw new InvalidParameterException("Unknown team color!");
+        }
     }
 
     public void createBed(Block start, BlockFace facing, Material material) {
