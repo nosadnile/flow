@@ -4,8 +4,11 @@ import dev.jorel.commandapi.CommandAPICommand;
 import dev.jorel.commandapi.arguments.GreedyStringArgument;
 import dev.jorel.commandapi.arguments.StringArgument;
 import dev.jorel.commandapi.executors.CommandArguments;
-import net.nosadnile.flow.purpur.npc.NPCHelper;
+import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.trait.SkinTrait;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 public class NPCCommand {
@@ -22,8 +25,9 @@ public class NPCCommand {
 
         if (name == null) return;
 
-        NPCHelper npc = new NPCHelper(skin, name, ((Player) sender).getLocation());
+        NPC npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, name);
 
-        npc.spawn();
+        npc.spawn(((Player) sender).getLocation());
+        npc.getOrAddTrait(SkinTrait.class).setSkinName(skin);
     }
 }
