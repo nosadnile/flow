@@ -106,3 +106,26 @@ serverHelper {
     serverDirectory.set(project.rootDir.resolve("run"))
     minecraftVersion.set("1.20.1")
 }
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "net.nosadnile.flow"
+            artifactId = "purpur"
+            version = version
+
+            from(components["java"])
+        }
+    }
+
+    repositories {
+        maven {
+            url = uri("https://repo.nosadnile.net/releases")
+
+            credentials {
+                username = System.getenv("MAVEN_REPO_TOKEN")
+                password = System.getenv("MAVEN_REPO_USER")
+            }
+        }
+    }
+}

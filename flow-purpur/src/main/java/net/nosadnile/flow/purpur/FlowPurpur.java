@@ -2,6 +2,8 @@ package net.nosadnile.flow.purpur;
 
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
+import net.citizensnpcs.Citizens;
+import net.citizensnpcs.api.CitizensPlugin;
 import net.nosadnile.flow.purpur.commands.NPCCommand;
 import net.nosadnile.flow.purpur.events.PlayerLoginListener;
 import net.nosadnile.flow.purpur.events.PlayerLogoutListener;
@@ -10,6 +12,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Objects;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")

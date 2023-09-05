@@ -63,3 +63,26 @@ serverHelper {
         server("creative", 25568)
     }
 }
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "net.nosadnile.flow"
+            artifactId = "velocity"
+            version = version
+
+            from(components["java"])
+        }
+    }
+
+    repositories {
+        maven {
+            url = uri("https://repo.nosadnile.net/releases")
+
+            credentials {
+                username = System.getenv("MAVEN_REPO_TOKEN")
+                password = System.getenv("MAVEN_REPO_USER")
+            }
+        }
+    }
+}

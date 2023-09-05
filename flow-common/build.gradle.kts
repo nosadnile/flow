@@ -69,13 +69,14 @@ publishing {
             from(components["java"])
         }
     }
+
     repositories {
         maven {
-            url = uri("https://maven.pkg.jetbrains.space/nosadnile/p/main/maven")
+            url = uri("https://repo.nosadnile.net/releases")
 
             credentials {
-                username = System.getProperty("space.username")
-                password = System.getProperty("space.password")
+                username = System.getenv("MAVEN_REPO_TOKEN")
+                password = System.getenv("MAVEN_REPO_USER")
             }
         }
     }
