@@ -123,8 +123,8 @@ publishing {
             url = uri("https://repo.nosadnile.net/releases")
 
             credentials {
-                username = System.getenv("MAVEN_REPO_TOKEN")
-                password = System.getenv("MAVEN_REPO_USER")
+                username = System.getenv("MAVEN_REPO_USER")
+                password = System.getenv("MAVEN_REPO_TOKEN")
             }
         }
     }
