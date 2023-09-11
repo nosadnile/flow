@@ -57,7 +57,7 @@ public class ServerCommand implements SimpleCommand {
 
             if (server.isPresent()) {
                 if (target.isPresent()) {
-                    if (server.get().getPlayersConnected().contains(target)) {
+                    if (server.get().getPlayersConnected().contains(target.get())) {
                         origin.sendMessage(ColorUtil.translateColorCodes('&',
                                 "&6[&f!&6]&f " + target.get().getUsername() + " is already connected to &b" +
                                         server.get().getServerInfo().getName() + "&f!"));

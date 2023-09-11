@@ -1,72 +1,7 @@
 import net.nosadnile.gradle.serverhelper.dsl.ServerType
 
 plugins {
-    id("java")
-    id("eclipse")
-    id("java-library")
-    id("maven-publish")
-    id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("net.nosadnile.gradle.serverhelper") version "1.6.0"
-}
-
-repositories {
-    mavenCentral()
-    mavenLocal()
-
-    maven {
-        name = "spigotmc-repo"
-        url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
-    }
-
-    maven {
-        name = "papermc-repo"
-        url = uri("https://repo.papermc.io/repository/maven-public/")
-    }
-
-    maven {
-        name = "purpurmc-repo"
-        url = uri("https://repo.purpurmc.org/snapshots")
-    }
-
-    maven {
-        name = "dmulloy2-repo"
-        url = uri("https://repo.dmulloy2.net/repository/public/")
-    }
-
-    maven {
-        name = "sonatype"
-        url = uri("https://oss.sonatype.org/content/groups/public/")
-    }
-
-    maven {
-        name = "jitpack"
-        url = uri("https://jitpack.io/")
-    }
-
-    maven {
-        name = "alessiodp"
-        url = uri("https://repo.alessiodp.com/releases/")
-    }
-
-    maven {
-        name = "PlaceholderAPI"
-        url = uri("https://repo.extendedclip.com/content/repositories/placeholderapi/")
-    }
-
-    maven {
-        name = "SimonStators-Repo"
-        url = uri("https://simonsator.de/repo/")
-    }
-
-    maven {
-        name = "CodeMC"
-        url = uri("https://repo.codemc.org/repository/maven-public/")
-    }
-
-    maven {
-        name = "Citizens"
-        url = uri("https://maven.citizensnpcs.co/repo")
-    }
+    id("net.nosadnile.gradle.serverhelper")
 }
 
 dependencies {
@@ -103,7 +38,7 @@ serverHelper {
     jvmArgs.add("-Dfile.encoding=UTF-8")
     serverArgs.add("-o true")
     serverType.set(ServerType.PURPUR)
-    serverDirectory.set(project.rootDir.resolve("run"))
+    serverDirectory.set(project.rootDir.resolve("run/purpur"))
     minecraftVersion.set("1.20.1")
 }
 

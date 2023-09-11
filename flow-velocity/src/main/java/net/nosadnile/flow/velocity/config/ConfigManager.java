@@ -28,22 +28,26 @@ public class ConfigManager {
         return this.getValue(key);
     }
 
+    @SuppressWarnings("unchecked")
     private Object getValueFromKey(String key) throws UnknownKeyException {
         if (key == "" || key == ".")
             return this.fullConfig;
 
         String[] keys = key.split("\\.");
+
         if (keys.length <= 1) {
             return this.fullConfig.get(key);
         } else {
             Object currentKey = this.fullConfig.get(keys[0]);
+        
             for (int i = 1; i < keys.length; i++) {
                 if (currentKey instanceof Map) {
-                    currentKey = ((Map) currentKey).get(keys[i]);
+                    currentKey = ((Map<String, Object>) currentKey).get(keys[i]);
                 } else {
                     throw new UnknownKeyException("Unknown key: " + key);
                 }
             }
+        
             return currentKey;
         }
     }

@@ -1,16 +1,1 @@
-{
-  "id": "flow-velocity",
-  "name": "Flow",
-  "version": "1.3.0",
-  "description": "Powering the NoSadNile Network since 2022.",
-  "url": "https://www.nosadnile.net/",
-  "authors": [
-    "RedstoneWizard08",
-    "NoSadBeHappy",
-    "KingGoldGolem",
-    "EverestPlayer",
-    "CloudWolf818"
-  ],
-  "dependencies": [],
-  "main": "net.nosadnile.flow.velocity.FlowVelocity"
-}
+{"id":"flow-velocity","name":"Flow","version":"1.3.0","description":"Powering the NoSadNile Network since 2022.","url":"https://www.nosadnile.net/","authors":["RedstoneWizard08","NoSadBeHappy","KingGoldGolem","EverestPlayer","CloudWolf818"],"dependencies":[],"main":"net.nosadnile.flow.velocity.FlowVelocity"}

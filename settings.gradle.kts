@@ -12,4 +12,4 @@ pluginManagement {
 
 rootProject.name = "flow"
 
-include("flow-purpur", "flow-velocity", "flow-common")
+include("flow-purpur", "flow-preload", "flow-velocity", "flow-common")

@@ -3,7 +3,8 @@
     "nuxt.isNuxtApp": false,
     "java.compile.nullAnalysis.mode": "automatic",
     "yaml.schemas": {
-        "https://json.schemastore.org/bukkit-plugin.json": "file:///home/jacob/flow/flow-purpur/src/main/resources/plugin.yml",
-        "https://raw.githubusercontent.com/devfile/api/v2.2.0/schemas/latest/devfile.json": "file:///home/jacob/flow/.space/devfile.yaml"
-    }
+        "https://json.schemastore.org/bukkit-plugin.json": "file:///${workspaceFolder}/flow-purpur/src/main/resources/plugin.yml"
+    },
+    "java.jdt.ls.java.home": "/usr/lib/jvm/java-17-openjdk-arm64",
+    "java.import.gradle.java.home": "/usr/lib/jvm/java-17-openjdk-arm64"
 }

@@ -32,9 +32,10 @@ public class TabListSystem {
         if (tabList == null) return;
 
         tabList.clearHeaderAndFooter();
-        tabList.setHeaderAndFooter(
-                getHeaderMessage(),
-                ColorUtil.translateColorCodes('&', " \n&6play.nosadnile.net\n ")
+        
+        player.sendPlayerListHeaderAndFooter(
+            getHeaderMessage(),
+            ColorUtil.translateColorCodes('&', " \n&6play.nosadnile.net\n ")
         );
 
         for (TabListEntry entry : tabList.getEntries()) {

@@ -5,15 +5,12 @@ plugins {
 }
 
 dependencies {
-    compileOnly("com.velocitypowered:velocity-api:3.1.1")
-    annotationProcessor("com.velocitypowered:velocity-api:3.1.1")
+    compileOnly(dependencyNotation = "org.purpurmc.purpur:purpur-api:1.20.1-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT")
+    compileOnly(dependencyNotation = "org.spigotmc:spigot:1.20-R0.1-SNAPSHOT")
 
-    compileOnly("net.luckperms:api:5.4")
-
-    implementation("org.mongodb:mongo-java-driver:2.12.3")
     implementation("com.google.guava:guava:31.0.1-jre")
-    implementation("org.yaml:snakeyaml:2.0")
-    implementation("org.javatuples:javatuples:1.2")
 
     implementation(project(":flow-common"))
 }
@@ -28,27 +25,18 @@ tasks.named("build") {
 
 serverHelper {
     eula.set(true)
-    serverType.set(ServerType.VELOCITY)
-    serverDirectory.set(project.rootDir.resolve("run/proxy"))
-    minecraftVersion.set("3.1.1")
-
-    proxy {
-        eula.set(true)
-        serverType.set(ServerType.PAPER)
-        minecraftVersion.set("1.20.1")
-        nogui.set(true)
-
-        server("lobby", 25566)
-        server("smp", 25567)
-        server("creative", 25568)
-    }
+    jvmArgs.add("-Dfile.encoding=UTF-8")
+    serverArgs.add("-o true")
+    serverType.set(ServerType.PURPUR)
+    serverDirectory.set(project.rootDir.resolve("run/preload"))
+    minecraftVersion.set("1.20.1")
 }
 
 publishing {
     publications {
         create<MavenPublication>("maven") {
             groupId = "net.nosadnile.flow"
-            artifactId = "velocity"
+            artifactId = "preload"
             version = version
 
             from(components["java"])
