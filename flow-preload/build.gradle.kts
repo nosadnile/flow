@@ -23,6 +23,10 @@ tasks.named("build") {
     dependsOn(tasks.shadowJar)
 }
 
+tasks.processResources {
+    expand("version" to project.version)
+}
+
 serverHelper {
     eula.set(true)
     jvmArgs.add("-Dfile.encoding=UTF-8")
